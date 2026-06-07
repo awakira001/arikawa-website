@@ -84,6 +84,46 @@
             -webkit-backdrop-filter: blur(12px);
         }
     </style>
+    <script>
+        // プレビュー環境のCORSやスペースURL同期ズレを段階的に解決する自動マッピング
+        function handleImageError(img) {
+            if (!img.dataset.attempt) {
+                img.dataset.attempt = "0";
+            }
+            const attempts = [
+                "arikawa%20photo%2001.jpg",
+                "arikawa photo 01.jpg",
+                "/arikawa%20photo%2001.jpg",
+                "/arikawa photo 01.jpg",
+                "./arikawa%20photo%2001.jpg",
+                "./arikawa photo 01.jpg",
+                "../arikawa%20photo%2001.jpg"
+            ];
+            const currentAttempt = parseInt(img.dataset.attempt);
+            if (currentAttempt < attempts.length) {
+                const nextSrc = attempts[currentAttempt];
+                img.dataset.attempt = (currentAttempt + 1).toString();
+                img.src = nextSrc;
+            } else {
+                // すべての手段で読み込みに失敗した場合に、アバターSVGを控えめに表示
+                img.style.display = 'none';
+                const loader = document.getElementById('image-loader');
+                const fallback = document.getElementById('image-fallback');
+                if (loader) loader.classList.add('hidden');
+                if (fallback) fallback.classList.remove('hidden');
+            }
+        }
+
+        // お写真が完全にロードされた場合の優雅なフェードイン処理
+        function handleImageLoad(img) {
+            const loader = document.getElementById('image-loader');
+            const fallback = document.getElementById('image-fallback');
+            if (loader) loader.classList.add('hidden');
+            if (fallback) fallback.classList.add('hidden');
+            img.classList.remove('opacity-0');
+            img.classList.add('opacity-100');
+        }
+    </script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans leading-relaxed flex flex-col min-h-screen">
 
@@ -213,12 +253,12 @@
                     </p>
                     <p class="text-slate-600 leading-relaxed max-w-3xl mx-auto text-sm sm:text-base">
                         私は、からだの仕組みを研究し、その知見を講演、体力測定会、健康づくり事業、学生教育の場で活かす活動を行っています。
-                        特に大切にしているのは、正しい知識を伝えるだけでなく、参加者が<strong>「自分のからだを知ることは面白い」</strong>と感じられる場をつくることです。
+                        特に大切にしているのは、正しい知識を伝えるだけで終わらず、参加者が<strong>「自分のからだを知ることは面白い」</strong>と感じられる場をつくることです。
                     </p>
                 </div>
             </div>
 
-            <!-- トップページ第3セクション：3つの顔（カード型レイアウト） -->
+            <!-- トップページ第3セクション：3つの顔 -->
             <div class="py-20 bg-slate-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-3xl mx-auto mb-16">
@@ -235,7 +275,7 @@
                                 </div>
                                 <h3 class="text-xl font-bold text-brandBlue-800 mb-3">研究者として</h3>
                                 <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                                    運動、呼吸、発声、体力測定、健康増進をテーマに、身体の仕組みを探究しています。研究の出発点には、スポーツや地域活動の現場で生まれた素朴な疑問があります。
+                                    運動、呼吸、発声、体力測定、健康増進をテーマに、身体の仕組みを探究しています。研究の出発点には、スポーツや地域活動 of 現場で生まれた素朴な疑問があります。
                                 </p>
                             </div>
                             <button onclick="switchTab('research')" class="text-brandBlue-800 font-bold text-sm hover:text-brandGreen-500 text-left flex items-center gap-1 group">
@@ -295,7 +335,7 @@
                                 その入り口から、自発的な健康づくりや生涯の運動習慣化のきっかけをつくります。
                             </p>
                             <div class="pt-3">
-                                <button onclick="switchTab('ex-fitness')" class="px-6 py-3 bg-brandBlue-800 text-white font-bold rounded-lg hover:bg-brandBlue-900 hover:scale-[1.02] active:scale-[0.98] transition-all shadow shadow-md">
+                                <button onclick="switchTab('ex-fitness')" class="px-6 py-3 bg-brandBlue-800 text-white font-bold rounded-lg hover:bg-brandBlue-900 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md">
                                     EX型体力測定会の詳細・実績を見る
                                 </button>
                             </div>
@@ -387,12 +427,32 @@
                     </h2>
                 </div>
 
-                <!-- 導入文：身近に感じるスポーツ科学 (写真付き) -->
+                <!-- 導入文：身近に感じるスポーツ科学 (重ね合わせアプローチ) -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                     <!-- 左：有川先生のお写真 -->
                     <div class="md:col-span-4 flex flex-col items-center">
                         <div class="w-full max-w-[280px] bg-white p-3 rounded-2xl shadow-md border border-slate-200">
-                            <img src="arikawa photo 01.jpg" alt="有川 一 教授" class="w-full h-auto rounded-xl object-cover aspect-square shadow-inner">
+                            <!-- レイヤードCSSコンテナ：読み込み中インジケータを配置し、お写真を綺麗に重ねる -->
+                            <div class="relative w-full aspect-[3/4] rounded-xl bg-slate-100 overflow-hidden shadow-inner border border-slate-200 flex items-center justify-center">
+                                <!-- 1. ローダーレイヤー（読込中スピナー） -->
+                                <div id="image-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-50 z-10">
+                                    <svg class="animate-spin h-8 w-8 text-brandGreen-500 mb-2" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.001 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    <span class="text-[10px] text-slate-400">お写真を読み込み中...</span>
+                                </div>
+
+                                <!-- 2. 背景フォールバックレイヤー：アバターSVG（完全に読み込みに失敗した時のみ表示） -->
+                                <div id="image-fallback" class="absolute inset-0 hidden flex items-center justify-center text-slate-300">
+                                    <svg class="w-24 h-32" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                                    </svg>
+                                </div>
+                                
+                                <!-- 3. 前景お写真（onload完了でopacityを100にしてフワッと見せる） -->
+                                <img src="arikawa photo 01.jpg" id="arikawa-portrait" alt="有川 一 教授" onload="handleImageLoad(this)" onerror="handleImageError(this)" class="absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-500 opacity-0">
+                            </div>
                             <div class="text-center mt-3">
                                 <p class="font-serif font-bold text-slate-800 text-lg">有川 一</p>
                                 <p class="text-xs text-brandGreen-600 font-medium">Hajime Arikawa</p>
@@ -500,7 +560,7 @@
                             <h4 class="font-bold text-brandBlue-800">4. 生理学研究の高度化と現在の「社会実装」へ</h4>
                             <p class="text-xs text-brandGreen-600 font-semibold mb-1">博士（医学）学位取得、スポーツ健康科学部 教授</p>
                             <p class="text-slate-600 leading-relaxed max-w-3xl text-sm sm:text-base">
-                                岐阜大学大学院医学系研究科を修了し、医学的な視点から呼吸・発声・全身運動の研究を深めました。現在は教授を務めながら、学術的な生理学の高度な成果を、地域住民や現場 of 指導者に極めて分かりやすく伝える活動に注力しています。
+                                岐阜大学大学院医学系研究科を修了し、医学的な視点から呼吸・発声・全身運動の研究を深めました。現在は教授を務めながら、学術的な生理学の高度な成果を、地域住民や現場の指導者に極めて分かりやすく伝える活動に注力しています。
                             </p>
                         </div>
                     </div>
@@ -841,8 +901,8 @@
                 <!-- 相談エンカレッジ -->
                 <div class="bg-brandBlue-50 p-6 rounded-2xl border border-brandBlue-100 text-center space-y-2">
                     <p class="font-bold text-brandBlue-800 text-sm sm:text-base">※まだ具体的にプランや日時・予算が決まっていなくても全く問題ありません</p>
-                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto">
-                        地域の課題（例：運動離れ、フレイル、少年団指導への不満、等）や、対象者のニーズ（高齢者、小中学生、一般社員等）に合わせて、講演・実技測定などを柔軟に組み合わせたオーダーメイドプランをご提案いたします。
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto flex items-center justify-center">
+                        地域の課題（例：運動離れ、フレイル、少年団指導への不満、等）や、対象者のニーズ（高齢者, 小中学生, 一般社員等）に合わせて、講演・実技測定などを柔軟に組み合わせたオーダーメイドプランをご提案いたします。
                     </p>
                 </div>
 
@@ -903,7 +963,7 @@
                     <div class="h-1 w-16 bg-brandGreen-500 mx-auto mt-4 rounded"></div>
                     <p class="text-slate-600 mt-4 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
                         「正しいから参加する」のではなく、「楽しそうだから参加してみる」。<br>
-                        その入口から、健康づくりや生涯運動を始めるきっかけをつくる、有川一の看板活動プロジェクトです。
+                        その入り口から、健康づくりや生涯運動を始めるきっかけをつく、有川一の看板活動プロジェクトです。
                     </p>
                 </div>
 
@@ -1178,7 +1238,6 @@
                     <p class="text-sm text-slate-700">
                         より詳細なブログ記事、有川一のコラム発信のアーカイブは外部Webサイトで公開されています。
                     </p>
-                    <!-- ご指定のURL (https://arikawa-weblog.jimdofree.com/) に変更 -->
                     <a href="https://arikawa-weblog.jimdofree.com/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-brandBlue-800 text-white font-bold rounded-lg hover:bg-brandBlue-900 transition shadow inline-flex items-center gap-2">
                         <i class="fa-solid fa-square-rss"></i> スポーツ科学系ブログ（外部）を読む
                     </a>
@@ -1382,7 +1441,7 @@
                 <span class="text-brandGreen-500 font-serif font-bold text-lg">有川 一 <span class="text-xs font-sans font-light text-slate-300">公式ホームページ</span></span>
                 <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
                     「からだを知る楽しさを、地域・教育・健康づくりの現場へ。」<br>
-                    生理学、スポーツ科学を地域の健康・教育、あらゆる社会の実践現場へ。
+                    生理学、運動生理学を地域の健康・教育、あらゆる社会の実践現場へ。
                 </p>
             </div>
             <!-- 中：メニュー -->
