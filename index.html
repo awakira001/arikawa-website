@@ -83,21 +83,26 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
+        /* 画像をより鮮明に滑らかに縮小・表示させる調整 */
+        .high-quality-img {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: auto;
+        }
     </style>
+    
     <script>
-        // プレビュー環境のCORSやスペースURL同期ズレを段階的に解決する自動マッピング
+        // 画像読み込みエラー時の段階的マッピング
         function handleImageError(img) {
             if (!img.dataset.attempt) {
                 img.dataset.attempt = "0";
             }
             const attempts = [
+                "arikawa_photo_01.jpg",
                 "arikawa%20photo%2001.jpg",
                 "arikawa photo 01.jpg",
-                "/arikawa%20photo%2001.jpg",
-                "/arikawa photo 01.jpg",
-                "./arikawa%20photo%2001.jpg",
-                "./arikawa photo 01.jpg",
-                "../arikawa%20photo%2001.jpg"
+                "/arikawa_photo_01.jpg",
+                "./arikawa_photo_01.jpg",
+                "../arikawa_photo_01.jpg"
             ];
             const currentAttempt = parseInt(img.dataset.attempt);
             if (currentAttempt < attempts.length) {
@@ -105,7 +110,7 @@
                 img.dataset.attempt = (currentAttempt + 1).toString();
                 img.src = nextSrc;
             } else {
-                // すべての手段で読み込みに失敗した場合に、アバターSVGを控えめに表示
+                // すべて読み込めない場合は、イラストレーターライクなインラインSVGフォールバックを表示
                 img.style.display = 'none';
                 const loader = document.getElementById('image-loader');
                 const fallback = document.getElementById('image-fallback');
@@ -114,7 +119,7 @@
             }
         }
 
-        // お写真が完全にロードされた場合の優雅なフェードイン処理
+        // 写真が完全にロードされた場合の優雅なフェードイン処理
         function handleImageLoad(img) {
             const loader = document.getElementById('image-loader');
             const fallback = document.getElementById('image-fallback');
@@ -196,12 +201,12 @@
                         <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-brandGreen-500 text-white bg-opacity-95 shadow-md">
                             <i class="fa-solid fa-graduation-cap mr-1.5"></i> スポーツ科学を「現場」へ
                         </span>
-                        <h1 class="text-3.5xl sm:text-4xl lg:text-5xl font-serif font-extrabold leading-tight tracking-tight">
+                        <h1 class="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold leading-tight tracking-tight">
                             からだを知る楽しさを、<br>
                             <span class="text-brandGreen-500">地域・教育・健康づくり</span>の現場へ。
                         </h1>
                         <p class="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl">
-                            スポーツ科学を、研究室の中だけで終わらせず、体力測定会、講演、地域活動、学生教育を通して、現場で使える形に「翻訳」しています。
+                            スポーツ科学を研究室の中だけで終わらせず、体力測定会、講演、地域活動、学生教育を通して、人々の目の前で使える実践的な形に「翻訳」しています。
                         </p>
                         <div class="flex flex-wrap gap-4 pt-3">
                             <button onclick="switchTab('contact')" class="px-6 py-3.5 bg-brandGreen-500 text-white font-bold rounded-lg shadow-lg hover:bg-brandGreen-600 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
@@ -222,7 +227,7 @@
                         <div class="py-6 space-y-4 text-sm text-slate-300">
                             <div class="flex items-start gap-3">
                                 <i class="fa-solid fa-microscope text-brandGreen-500 w-5 mt-1 text-center"></i>
-                                <span><strong>研究者として：</strong> 現場 of 疑問から出発する呼吸生理学、運動・発声研究</span>
+                                <span><strong>研究者として：</strong> 現場の疑問から出発する呼吸生理学、運動・発声研究</span>
                             </div>
                             <div class="flex items-start gap-3">
                                 <i class="fa-solid fa-users-gear text-brandGreen-500 w-5 mt-1 text-center"></i>
@@ -244,7 +249,7 @@
             <div class="py-20 bg-white border-b border-slate-100">
                 <div class="max-w-4xl mx-auto px-4 text-center space-y-6">
                     <span class="text-brandGreen-500 font-bold text-xs tracking-widest uppercase">Philosophy</span>
-                    <h2 class="text-2.5xl sm:text-4xl font-serif font-bold text-brandBlue-800 leading-tight">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-brandBlue-800 leading-tight">
                         スポーツ科学を、現場で使える形に変える。
                     </h2>
                     <div class="h-1.5 w-16 bg-brandGreen-500 mx-auto rounded"></div>
@@ -252,8 +257,8 @@
                         スポーツ科学には、アスリートだけでなく、子ども、高齢者、働く世代、地域の指導者、教育関係者に役立つ知見が多く含まれています。
                     </p>
                     <p class="text-slate-600 leading-relaxed max-w-3xl mx-auto text-sm sm:text-base">
-                        私は、からだの仕組みを研究し、その知見を講演、体力測定会、健康づくり事業、学生教育の場で活かす活動を行っています。
-                        特に大切にしているのは、正しい知識を伝えるだけで終わらず、参加者が<strong>「自分のからだを知ることは面白い」</strong>と感じられる場をつくることです。
+                        私は、からだの仕組みを科学的に研究し、その知見を講演、体力測定会、健康づくり事業、そして学生教育の場で活かす活動を行っています。<br>
+                        特に大切にしているのは、単に正しい知識を一方的に伝えるだけで終わらず、参加者全員が<strong>「自分のからだを知ることはこれほど面白いのか」</strong>と、心から感じられる場をつくることです。
                     </p>
                 </div>
             </div>
@@ -263,7 +268,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-3xl mx-auto mb-16">
                         <h2 class="text-3xl font-serif font-bold text-brandBlue-800">現場と学術をつなぐ3つの「顔」</h2>
-                        <p class="text-slate-500 mt-2 text-sm">専門性、人材育成、そして地域実践を循環させるアプローチを行っています。</p>
+                        <p class="text-slate-500 mt-2 text-sm">専門性、人材育成、および地域での実践を循環させるアプローチを行っています。</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -275,7 +280,7 @@
                                 </div>
                                 <h3 class="text-xl font-bold text-brandBlue-800 mb-3">研究者として</h3>
                                 <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                                    運動、呼吸、発声、体力測定、健康増進をテーマに、身体の仕組みを探究しています。研究の出発点には、スポーツや地域活動 of 現場で生まれた素朴な疑問があります。
+                                    運動、呼吸、発声、体力測定、健康増進をテーマに、身体の仕組みを探究しています。研究の出発点には、スポーツや地域活動の現場で生まれた素朴な疑問があります。
                                 </p>
                             </div>
                             <button onclick="switchTab('research')" class="text-brandBlue-800 font-bold text-sm hover:text-brandGreen-500 text-left flex items-center gap-1 group">
@@ -328,7 +333,7 @@
                                 EX型体力測定会キャラバン
                             </h2>
                             <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                                体力測定を、単なる評価やつらい「検査」ではなく、楽しみながら自分のからだを知る「健康エンターテインメントイベント」に変革する取り組みです。
+                                体力測定を、単なる評価やつらい「検査」ではなく、楽しみながら自分のからだを知る「健康エンターテインメントイベント」に変革（Entertainment Transformation = EX）する取り組みです。
                             </p>
                             <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-bold border-l-4 border-brandOrange-500 pl-3">
                                 「正しいから参加する」のではなく、「楽しそうだから参加してみる」。<br>
@@ -342,7 +347,7 @@
                         </div>
                         <!-- リッチなイラストレーターSVG -->
                         <div class="lg:col-span-5 h-64 md:h-80 bg-gradient-to-tr from-slate-100 to-white rounded-2xl overflow-hidden shadow-inner flex flex-col items-center justify-center relative p-6 border border-slate-200">
-                            <svg class="w-32 h-32 text-brandGreen-500 mb-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <svg class="w-24 h-24 text-brandGreen-500 mb-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                             </svg>
                             <p class="text-sm text-slate-700 font-bold">EX（Entertainment Transformation）</p>
@@ -429,29 +434,33 @@
 
                 <!-- 導入文：身近に感じるスポーツ科学 (重ね合わせアプローチ) -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                    <!-- 左：有川先生のお写真 -->
+                    <!-- 左：有川先生のお写真（ご提供いただいた arikawa_photo_01.jpg を最高品質で表示） -->
                     <div class="md:col-span-4 flex flex-col items-center">
-                        <div class="w-full max-w-[280px] bg-white p-3 rounded-2xl shadow-md border border-slate-200">
-                            <!-- レイヤードCSSコンテナ：アスペクト比を1:1(正方形)にして画像が綺麗に縮小表示されるようにする -->
-                            <div class="relative w-full aspect-square rounded-xl bg-slate-100 overflow-hidden shadow-inner border border-slate-200 flex items-center justify-center">
+                        <!-- 写真に美しいシャドウ、角丸、及びプレミアムな質感の二重枠線を設定 -->
+                        <div class="w-full max-w-[280px] bg-white p-3 rounded-2xl shadow-xl border border-slate-200/80 hover:shadow-2xl transition-all duration-300">
+                            <!-- レイヤードCSSコンテナ：アスペクト比を1:1(正方形)にして画像が美しくフィット -->
+                            <div class="relative w-full aspect-square rounded-xl bg-slate-100 overflow-hidden shadow-inner border border-slate-200 flex items-center justify-center group">
+                                
                                 <!-- 1. ローダーレイヤー（読込中スピナー） -->
-                                <div id="image-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-50 z-10">
+                                <div id="image-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-50 z-10 transition-opacity duration-300">
                                     <svg class="animate-spin h-8 w-8 text-brandGreen-500 mb-2" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.001 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
-                                    <span class="text-[10px] text-slate-400">お写真を読み込み中...</span>
+                                    <span class="text-[10px] text-slate-400">高画質写真を読み込み中...</span>
                                 </div>
 
-                                <!-- 2. 背景フォールバックレイヤー：アバターSVG -->
-                                <div id="image-fallback" class="absolute inset-0 hidden flex items-center justify-center text-slate-300">
-                                    <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                                <!-- 2. 背景フォールバックレイヤー：万一の際のイラストレーターライクなインラインSVG -->
+                                <div id="image-fallback" class="absolute inset-0 hidden flex flex-col items-center justify-center bg-gradient-to-tr from-brandBlue-50 to-brandBlue-100 text-brandBlue-800 p-4 text-center">
+                                    <svg class="w-20 h-20 text-brandBlue-800 opacity-80 mb-2" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
                                     </svg>
+                                    <span class="text-xs font-bold text-brandBlue-900">有川 一 教授</span>
+                                    <span class="text-[9px] text-slate-500 mt-0.5">Chubu Gakuin Univ.</span>
                                 </div>
                                 
-                                <!-- 3. 前景お写真：1:1に完全にフィットするobject-coverを適用 -->
-                                <img src="arikawa photo 01.jpg" id="arikawa-portrait" alt="有川 一 教授" onload="handleImageLoad(this)" onerror="handleImageError(this)" class="absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-500 opacity-0">
+                                <!-- 3. 前景お写真：ご提供の arikawa_photo_01.jpg。高画質にフィットさせ、ホバー時に微細にズームするエフェクト -->
+                                <img src="arikawa_photo_01.jpg" id="arikawa-portrait" alt="有川 一 教授" onload="handleImageLoad(this)" onerror="handleImageError(this)" class="absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-700 ease-out opacity-0 group-hover:scale-105 high-quality-img">
                             </div>
                             <div class="text-center mt-3">
                                 <p class="font-serif font-bold text-slate-800 text-lg">有川 一</p>
@@ -471,7 +480,7 @@
                             </p>
                             <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
                                 スポーツ科学は、アスリートや専門家だけのものではありません。
-                                自分の体力を知ること、身体を動かしたときに生理学的に何が起きているかを知ること、健康づくりを無理なく続けること。そのすべてのステップに、科学の知識は驚くほど役立ちます。
+                                自分の体力を知ること、身体を動かしたときに生理学的に何が起きているかを知ること、健康づくりを無理なく続けること。そのすべてのステップに、科学の知識は驚くほど力を発揮します。
                             </p>
                         </div>
 
@@ -482,7 +491,7 @@
                             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                                 地域の現場で体力測定会や講演を行うと、多くの人が「自分のからだのことを意外と知らない」ことに気づきます。
                                 一方で、数値や専門用語だけを突きつけても、それが自発的な行動変容につながるとは限りません。
-                                大切なのは、からだを知ることを、楽しく、わかりやすく、自分ごととして受け止められるように届けることです。
+                                大切なのは、からだを知るプロセスを、楽しく、わかりやすく、自分ごととして受け止められるように演出して届けることです。
                             </p>
                         </div>
                     </div>
@@ -544,7 +553,7 @@
                             <h4 class="font-bold text-brandBlue-800">2. 高校保健体育教員としての現場体験・葛藤</h4>
                             <p class="text-xs text-brandGreen-600 font-semibold mb-1">岐阜県内高校での教諭時代（岐阜北高、土岐商業高など）</p>
                             <p class="text-slate-600 leading-relaxed max-w-3xl text-sm sm:text-base">
-                                現場の「体育嫌い」「運動嫌い」の子どもたちの増加や、基礎体力の著しい低下の問題に直接向き合いました。ここで「難解な教科書的理論ではなく、身体を動かして心から楽しいと思わせるアプローチ」の必要性を痛感しました。
+                                現場における「体育嫌い」「運動嫌い」の子どもたちの増加や、基礎体力の著しい低下の問題に直接向き合いました。ここで「難解な教科書的理論ではなく、身体を動かして心から楽しいと思わせるアプローチ」の必要性を痛感しました。
                             </p>
                         </div>
                         <div class="relative">
@@ -708,7 +717,7 @@
 
                 <!-- 導入文 -->
                 <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-4xl">
-                    私の研究は、運動中の身体反応、呼吸・発声、体力測定、健康増進活動などを中心に展開しています。
+                    私の研究は、運動中の身体反応、呼吸・発声、体力測定、健康増進活動などを中心に展開しています。<br>
                     研究で得られた知見を、教育、地域貢献、講演、体力測定会に活かし、スポーツ科学を社会に還元することを重視しています。正式な学術論文リストは上記の researchmap リンクをご活用ください。
                 </p>
 
@@ -861,7 +870,7 @@
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> スポーツ科学を現場の指導に翻訳して活かす</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> ジュニア期の発育発達に適した適切な運動指導</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 叱る指導からの脱却：選手のやる気（自律性）を引き出す</li>
-                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 指難者が絶対に知っておきたい身体負荷の仕組み</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 指導者が絶対に知っておきたい身体負荷の仕組み</li>
                         </ul>
                     </div>
 
@@ -902,7 +911,7 @@
                 <div class="bg-brandBlue-50 p-6 rounded-2xl border border-brandBlue-100 text-center space-y-2">
                     <p class="font-bold text-brandBlue-800 text-sm sm:text-base">※まだ具体的にプランや日時・予算が決まっていなくても全く問題ありません</p>
                     <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto flex items-center justify-center">
-                        地域の課題（例：運動離れ、フレイル、少年団指導への不満、等）や、対象者のニーズ（高齢者, 小中学生, 一般社員等）に合わせて、講演・実技測定などを柔軟に組み合わせたオーダーメイドプランをご提案いたします。
+                        地域の課題（例：運動離れ、フレイル、少年団指導への不満、等）や、対象者のニーズ（高齢者、小中学生、一般社員等）に合わせて、講演・実技測定などを柔軟に組み合わせたオーダーメイドプランをご提案いたします。
                     </p>
                 </div>
 
@@ -963,7 +972,7 @@
                     <div class="h-1 w-16 bg-brandGreen-500 mx-auto mt-4 rounded"></div>
                     <p class="text-slate-600 mt-4 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
                         「正しいから参加する」のではなく、「楽しそうだから参加してみる」。<br>
-                        その入り口から、健康づくりや生涯運動を始めるきっかけをつく、有川一の看板活動プロジェクトです。
+                        その入り口から、健康づくりや生涯運動を始めるきっかけをつくる、有川一の看板活動プロジェクトです。
                     </p>
                 </div>
 
@@ -1095,10 +1104,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                     <div class="md:col-span-8 space-y-4 text-sm sm:text-base text-slate-600">
                         <p class="leading-relaxed font-bold text-brandBlue-800">
-                            大学の教室だけで学ぶスポーツ科学は、半分に過ぎません。残りの半分は、地域の現場に踏み出し、人々と対話することで初めて完成します。
+                            大学の教室だけで学ぶスポーツ科学は、半分に過ぎません。残りの半分は、地域の現場に踏み出し、人々と直接対話することで初めて完成します。
                         </p>
                         <p class="leading-relaxed text-sm">
-                            中部学院大学スポーツ健康科学部における有川ゼミ、ならびに体力測定学生プロジェクトチームは、単に測定の「補助要員」として活動しているのではありません。
+                            中部学院大学スポーツ健康科学部における有川ゼミ、ならびに体力測定学生プロジェクトチームは、単に測定の「補助要員」として活動しているのではありません。<br>
                             自分たちで健康イベントを企画・シミュレーションし、専門機材を安全に扱い、高齢者や子ども、働く人々に対して「相手が納得できる言葉」で身体の仕組みを解説する、主体的な学習者として参加しています。
                         </p>
                     </div>
@@ -1136,7 +1145,7 @@
                             <i class="fa-solid fa-university text-brandGreen-500"></i> 大学としての価値
                         </h3>
                         <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                            「研究」「教育」「社会実装」の3つが完全にシームレスに調和した、地域総合型連携モデルの優れた実例となります。他大学にはない、中部学院大学スポーツ健康科学部の大きな特色・強みとしてアピールできます。
+                            「研究」「教育」「社会実装」の3つが完全にシームレスに調和した、地域総合型連携モデル of 実例となります。他大学にはない、中部学院大学スポーツ健康科学部の大きな特色・強みとしてアピールできます。
                         </p>
                     </div>
                 </div>
@@ -1145,7 +1154,7 @@
                 <div class="bg-brandBlue-50 p-8 rounded-2xl border border-brandBlue-100 text-center">
                     <p class="text-xs text-brandBlue-800 font-bold uppercase tracking-widest">Message from Project Lead</p>
                     <p class="text-slate-700 text-sm sm:text-base mt-3 leading-relaxed max-w-3xl mx-auto italic">
-                        「はじめは一般の高齢者の方に対してぎこちない喋り方だった学生が、測定会が進むにつれて驚くほど目つきが変わり、相手を励まし、結果を丁寧にアドバイスできるようになる。その飛躍的な成長を目撃することこそ、私自身の最大の教育の喜びです。」
+                        「はじめは一般の高齢者の方に対してぎこちない喋り方だった学生が、測定会が進むにつれて驚くほど目つきが変わり、相手を全力で励まし、結果を丁寧にアドバイスできるようになる。その飛躍的な成長を目の前で目撃することこそ、私自身の最大の教育の喜びです。」
                     </p>
                 </div>
             </div>
@@ -1232,7 +1241,6 @@
                     </div>
                 </div>
 
-
                 <!-- 外部ブログへの接続 -->
                 <div class="bg-brandBlue-50 p-8 rounded-2xl border border-brandBlue-100 text-center space-y-4">
                     <p class="text-sm text-slate-700">
@@ -1257,7 +1265,7 @@
                     </h2>
                     <p class="text-slate-500 mt-3 text-sm max-w-2xl mx-auto leading-relaxed">
                         講演、研修、体力測定会、健康づくり事業、スポーツ科学に関する情報提供などのご相談を受け付けています。<br>
-                        対象者、目的、実施時期、会場、予算などが未定 of 段階でもお気軽にご相談ください。
+                        対象者、目的、実施時期、会場、予算などが未定の段階でもお気軽にご相談ください。
                     </p>
                 </div>
 
@@ -1317,7 +1325,7 @@
                                     <option value="学校・PTA向け講演">学校・PTA向け講演</option>
                                     <option value="EX型体力測定会開催">EX型体力測定会の開催</option>
                                     <option value="学生プロジェクト連携">学生プロジェクトとの連携</option>
-                                    <option value="共同研究ご相談">共同研究・地域健康事業 of 相談</option>
+                                    <option value="共同研究ご相談">共同研究・地域健康事業のご相談</option>
                                     <option value="メディア・執筆依頼">取材・原稿執筆依頼</option>
                                     <option value="その他お問い合わせ">その他のお問い合わせ</option>
                                 </select>
@@ -1376,7 +1384,7 @@
                         Faculty of Sports and Health Science, Chubu Gakuin University
                     </p>
                     <p class="text-xs text-slate-500">
-                        Board Member of the Physiological Society of Japan / Certified Physiology Educator (No. 150242)
+                        Board Member of Chubu Gakuin University Sports College / Certified Physiology Educator of the Physiological Society of Japan (No. 150242)
                     </p>
                 </div>
 
@@ -1434,7 +1442,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-brandBlue-900 text-white border-t border-brandBlue-800 py-12 text-sm">
+    <footer class="bg-brandBlue-900 text-white border-t border-brandBlue-800 py-12 text-sm mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8">
             <!-- 左：ビジョン -->
             <div class="md:col-span-5 space-y-4">
@@ -1561,7 +1569,7 @@
             }
         }
 
-        // お問い合わせフォームダミー送信
+        // お問い合わせフォーム送信シミュレーション
         function handleFormSubmit(event) {
             event.preventDefault();
             
@@ -1571,7 +1579,7 @@
             const email = document.getElementById('form-email').value;
             const type = document.getElementById('form-type').value;
 
-            // プレビューの反映
+            // プレビューへのデータバインディング
             document.getElementById('summary-name').innerText = name;
             document.getElementById('summary-org').innerText = org;
             document.getElementById('summary-type').innerText = type;
@@ -1592,7 +1600,6 @@
             form.classList.remove('hidden');
             successMsg.classList.add('hidden');
         }
-
     </script>
 </body>
 </html>
