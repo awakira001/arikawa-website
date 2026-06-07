@@ -1293,76 +1293,46 @@
                         </div>
                     </div>
 
-                    <!-- 右：問い合わせフォーム -->
-                    <div class="lg:col-span-7 bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-sm">
-                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                            <div>
-                                <label class="block text-slate-700 font-bold mb-1">お名前・代表者氏名 <span class="text-red-500">*</span></label>
-                                <input type="text" id="form-name" required class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
+                    <!-- 右：お問い合わせ案内・外部フォームへの遷移ボタン -->
+                    <div class="lg:col-span-7 bg-white p-8 sm:p-10 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between min-h-[420px]">
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                                <span class="text-brandGreen-500 text-2xl"><i class="fa-solid fa-file-signature animate-pulse"></i></span>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-base sm:text-lg">オンライン相談受付フォーム</h4>
+                                    <p class="text-xs text-slate-400 mt-0.5">専用入力フォーム（Googleフォーム）へ移動します</p>
+                                </div>
                             </div>
-
-                            <div>
-                                <label class="block text-slate-700 font-bold mb-1">所属・団体名 / 自治体名</label>
-                                <input type="text" id="form-org" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
-                            </div>
-
-                            <div>
-                                <label class="block text-slate-700 font-bold mb-1">メールアドレス <span class="text-red-500">*</span></label>
-                                <input type="email" id="form-email" required class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
-                            </div>
-
-                            <div>
-                                <label class="block text-slate-700 font-bold mb-1">お電話番号</label>
-                                <input type="tel" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
-                            </div>
-
-                            <div>
-                                <label class="block text-slate-700 font-bold mb-1">ご相談内容 <span class="text-red-500">*</span></label>
-                                <select required id="form-type" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none bg-white">
-                                    <option value="">-- 選択してください --</option>
-                                    <option value="健康講演">一般向け・高齢者向け健康講演</option>
-                                    <option value="スポーツ指導者研修">スポーツ指導者研修講演</option>
-                                    <option value="学校・PTA向け講演">学校・PTA向け講演</option>
-                                    <option value="EX型体力測定会開催">EX型体力測定会の開催</option>
-                                    <option value="学生プロジェクト連携">学生プロジェクトとの連携</option>
-                                    <option value="共同研究ご相談">共同研究・地域健康事業のご相談</option>
-                                    <option value="メディア・執筆依頼">取材・原稿執筆依頼</option>
-                                    <option value="その他お問い合わせ">その他のお問い合わせ</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-slate-700 font-bold mb-1">想定する対象者イメージ・参加人数</label>
-                                <input type="text" placeholder="例：高齢者30名、小中学生の保護者50名、等" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
-                            </div>
-
-                            <div>
-                                <label class="block text-slate-700 font-bold mb-1">相談の詳細、希望時期、ご予算等</label>
-                                <textarea id="form-detail" rows="4" placeholder="大体の時期や希望、予算感などがございましたらご自由にお書きください。" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none"></textarea>
-                            </div>
-
-                            <button type="submit" class="w-full py-3 bg-brandGreen-500 text-white font-bold rounded shadow hover:bg-brandGreen-600 transition duration-200">
-                                <i class="fa-solid fa-paper-plane mr-2"></i>送信内容を確認して送信する
-                            </button>
-                        </form>
-                        
-                        <!-- 送信完了表示 -->
-                        <div id="form-success-msg" class="hidden text-center py-6 space-y-4">
-                            <span class="text-brandGreen-500 text-5xl animate-bounce inline-block"><i class="fa-solid fa-circle-check"></i></span>
-                            <h4 class="font-bold text-slate-900 text-lg">お問い合わせ内容を送信しました</h4>
                             
-                            <!-- 簡易確認プレビュー -->
-                            <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-left text-xs text-slate-600 space-y-2 max-w-md mx-auto shadow-inner">
-                                <p><strong>送信内容の控え：</strong></p>
-                                <p>■ お名前: <span id="summary-name" class="font-medium text-slate-800"></span></p>
-                                <p>■ 所属: <span id="summary-org" class="font-medium text-slate-800"></span></p>
-                                <p>■ 種別: <span id="summary-type" class="font-medium text-slate-800"></span></p>
+                            <p class="text-slate-600 leading-relaxed text-xs sm:text-sm">
+                                講演・研修のご依頼、EX型体力測定会の開催計画、学生プロジェクトとの地域連携企画、共同研究などのご相談窓口をスムーズに行うため、外部のセキュアな入力フォームを導入しております。
+                            </p>
+
+                            <div class="bg-slate-50 rounded-xl p-5 border border-slate-100 space-y-3">
+                                <h5 class="font-bold text-brandBlue-800 text-xs flex items-center gap-1.5">
+                                    <i class="fa-solid fa-clipboard-list text-brandGreen-500"></i> 主な受付内容
+                                </h5>
+                                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-600">
+                                    <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-brandGreen-500 text-[10px]"></i> 一般・高齢者・勤労者向け健康講演</li>
+                                    <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-brandGreen-500 text-[10px]"></i> 指導者・学校・PTA向け専門研修</li>
+                                    <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-brandGreen-500 text-[10px]"></i> EX型体力測定会の企画・キャラバン</li>
+                                    <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-brandGreen-500 text-[10px]"></i> 共同研究・社会連携・その他のご相談</li>
+                                </ul>
                             </div>
 
-                            <p class="text-xs text-slate-500 leading-relaxed">
-                                お送りいただいた内容を確認のうえ、研究室よりお返事を差し上げます。<br>今しばらくお待ちください。
+                            <p class="text-[11px] text-slate-400 leading-relaxed">
+                                ※まだ具体的な日程や参加人数、ご予算等がお決まりでない状態でも、お気軽にお問い合わせください。送信いただいた内容を元に、担当より折り返しご連絡いたします。
                             </p>
-                            <button onclick="resetContactForm()" class="px-4 py-2 bg-slate-100 text-slate-600 rounded text-xs hover:bg-slate-200 transition">別のお問い合わせを送る</button>
+                        </div>
+
+                        <div class="pt-8">
+                            <a href="https://forms.gle/xniuHy8f5JihZCeU9" target="_blank" rel="noopener noreferrer" class="w-full py-4 px-6 bg-brandGreen-500 hover:bg-brandGreen-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-center flex items-center justify-center gap-3 group text-sm sm:text-base">
+                                <span>ご相談・お問い合わせを入力する</span>
+                                <i class="fa-solid fa-up-right-from-square transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                            </a>
+                            <span class="text-[11px] text-slate-400 text-center block mt-3">
+                                <i class="fa-solid fa-shield-halved mr-1"></i> Google社の保護された通信規格により、お送りいただく個人情報は暗号化され安全に送信されます。
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -1474,7 +1444,7 @@
                     <a href="https://researchmap.jp/arikawahajime" target="_blank" rel="noopener noreferrer" class="hover:text-white flex items-center gap-1.5 transition">
                         <i class="fa-solid fa-up-right-from-square"></i> researchmap (有川 一)
                     </a>
-                    <a href="https://ex-physical-test-caravan.jimdosite.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white flex items-center gap-1.5 transition">
+                    <a href="https://arikawa-webpage.jimdosite.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white flex items-center gap-1.5 transition">
                         <i class="fa-solid fa-up-right-from-square"></i> 旧ホームページ（Jimdo版）
                     </a>
                 </div>
@@ -1567,38 +1537,6 @@
                 icon.className = 'fa-solid fa-bars text-2xl';
                 button.setAttribute('aria-expanded', 'false');
             }
-        }
-
-        // お問い合わせフォーム送信シミュレーション
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            // 入力データの取得
-            const name = document.getElementById('form-name').value;
-            const org = document.getElementById('form-org').value || '個人 / なし';
-            const email = document.getElementById('form-email').value;
-            const type = document.getElementById('form-type').value;
-
-            // プレビューへのデータバインディング
-            document.getElementById('summary-name').innerText = name;
-            document.getElementById('summary-org').innerText = org;
-            document.getElementById('summary-type').innerText = type;
-
-            const form = document.getElementById('contact-form');
-            const successMsg = document.getElementById('form-success-msg');
-            
-            form.classList.add('hidden');
-            successMsg.classList.remove('hidden');
-        }
-
-        // フォームリセット
-        function resetContactForm() {
-            const form = document.getElementById('contact-form');
-            const successMsg = document.getElementById('form-success-msg');
-            
-            form.reset();
-            form.classList.remove('hidden');
-            successMsg.classList.add('hidden');
         }
     </script>
 </body>
