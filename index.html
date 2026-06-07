@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>有川 一 公式ホームページ | 中部学院大学スポーツ健康科学部 教授</title>
-    <!-- Tailwind CSS (高品位かつ軽量なWebアプリケーション設計に採用) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -43,7 +43,7 @@
     <!-- Font Awesome (アイコン用) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- MathJax (研究紹介セクションの数式や化学式 [CO2, FeNO等] を最高精度でレンダリング) -->
+    <!-- MathJax -->
     <script>
         window.MathJax = {
             tex: {
@@ -64,37 +64,56 @@
             color: #10b981 !important;
             border-bottom: 3px solid #10b981;
         }
+        /* フェードインアニメーションの定義 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        /* グラスモルフィズム等の細かなスタイル調整 */
+        .backdrop-blur-md {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans leading-relaxed flex flex-col min-h-screen">
 
-    <!-- HEADER / NAVIGATION (Googleサイトに合わせた分かりやすいグローバルメニュー) -->
+    <!-- HEADER / NAVIGATION -->
     <header class="bg-brandBlue-900 text-white sticky top-0 z-50 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- 左：ロゴ / 肩書き -->
-                <div class="flex flex-col cursor-pointer" onclick="switchTab('home')">
+                <div class="flex flex-col cursor-pointer transition hover:opacity-90" onclick="switchTab('home')">
                     <span class="text-[10px] sm:text-xs text-brandGreen-500 tracking-wider font-bold">中部学院大学 教授 / 博士（医学）</span>
                     <span class="text-lg sm:text-xl font-serif font-bold tracking-tight text-white">有川 一 <span class="text-xs font-sans font-normal text-slate-300">公式ホームページ</span></span>
                 </div>
 
-                <!-- PC用ナビゲーションメニュー (実名ブランドの核となるページ構成) -->
-                <nav class="hidden lg:flex space-x-0.5 xl:space-x-1 text-xs xl:text-sm font-medium">
-                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition nav-link-active">ホーム</button>
-                    <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition">有川 一について</button>
-                    <button onclick="switchTab('pillars')" id="nav-pillars" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition">活動の7本柱</button>
-                    <button onclick="switchTab('research')" id="nav-research" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition">研究</button>
-                    <button onclick="switchTab('community')" id="nav-community" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition">地域貢献・講演</button>
-                    <button onclick="switchTab('ex-fitness')" id="nav-ex-fitness" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition">EX型体力測定会</button>
-                    <button onclick="switchTab('students')" id="nav-students" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition">学生プロジェクト</button>
-                    <button onclick="switchTab('blog')" id="nav-blog" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition">コラム・発信</button>
-                    <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn px-2.5 py-2 text-slate-300 hover:text-white transition">お問い合わせ</button>
+                <!-- PC用ナビゲーションメニュー -->
+                <nav class="hidden lg:flex space-x-0.5 xl:space-x-1 text-xs xl:text-sm font-medium h-full items-center">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition nav-link-active">ホーム</button>
+                    <button onclick="switchTab('about')" id="nav-about" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition">有川 一について</button>
+                    <button onclick="switchTab('pillars')" id="nav-pillars" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition">活動の7本柱</button>
+                    <button onclick="switchTab('research')" id="nav-research" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition">研究</button>
+                    <button onclick="switchTab('community')" id="nav-community" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition">地域貢献・講演</button>
+                    <button onclick="switchTab('ex-fitness')" id="nav-ex-fitness" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition">EX型体力測定会</button>
+                    <button onclick="switchTab('students')" id="nav-students" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition">学生プロジェクト</button>
+                    <button onclick="switchTab('blog')" id="nav-blog" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition">コラム・発信</button>
+                    <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn h-full px-2.5 xl:px-3 py-2 text-slate-300 hover:text-white transition">お問い合わせ</button>
                     <button onclick="switchTab('english')" id="nav-english" class="nav-btn ml-1 px-2.5 py-1 text-brandGreen-500 hover:text-white transition border border-brandGreen-500 rounded hover:bg-brandGreen-500"><i class="fa-solid fa-globe mr-1"></i>EN</button>
                 </nav>
 
                 <!-- スマホ用メニューボタン -->
                 <div class="lg:hidden">
-                    <button id="mobile-menu-button" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-white p-2" aria-label="メニューを開く">
+                    <button id="mobile-menu-button" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-white p-2 focus:outline-none" aria-label="メニューを開く" aria-expanded="false">
                         <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -102,33 +121,31 @@
         </div>
 
         <!-- スマホ用ナビゲーションメニュー -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-brandBlue-900 border-t border-brandBlue-800">
+        <div id="mobile-menu" class="hidden lg:hidden bg-brandBlue-900 border-t border-brandBlue-800 transition-all duration-300">
             <div class="px-2 pt-2 pb-4 space-y-1">
-                <button onclick="switchTab('home')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-white bg-brandBlue-800">ホーム</button>
-                <button onclick="switchTab('about')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">有川 一について</button>
-                <button onclick="switchTab('pillars')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">活動の7本柱</button>
-                <button onclick="switchTab('research')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">研究</button>
-                <button onclick="switchTab('community')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">地域貢献・講演</button>
-                <button onclick="switchTab('ex-fitness')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">EX型体力測定会</button>
-                <button onclick="switchTab('students')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">教育・学生プロジェクト</button>
-                <button onclick="switchTab('blog')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">コラム・発信</button>
-                <button onclick="switchTab('contact')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">お問い合わせ</button>
-                <button onclick="switchTab('english')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded text-sm font-medium text-brandGreen-500 hover:bg-brandGreen-500 hover:text-white"><i class="fa-solid fa-globe mr-1"></i>English</button>
+                <button onclick="switchTab('home')" id="mobile-nav-home" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-white bg-brandBlue-800">ホーム</button>
+                <button onclick="switchTab('about')" id="mobile-nav-about" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">有川 一について</button>
+                <button onclick="switchTab('pillars')" id="mobile-nav-pillars" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">活動の7本柱</button>
+                <button onclick="switchTab('research')" id="mobile-nav-research" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">研究</button>
+                <button onclick="switchTab('community')" id="mobile-nav-community" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">地域貢献・講演</button>
+                <button onclick="switchTab('ex-fitness')" id="mobile-nav-ex-fitness" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">EX型体力測定会</button>
+                <button onclick="switchTab('students')" id="mobile-nav-students" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">学生プロジェクト</button>
+                <button onclick="switchTab('blog')" id="mobile-nav-blog" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">コラム・発信</button>
+                <button onclick="switchTab('contact')" id="mobile-nav-contact" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-slate-300 hover:bg-brandBlue-800 hover:text-white">お問い合わせ</button>
+                <button onclick="switchTab('english')" id="mobile-nav-english" class="mobile-nav-btn block w-full text-left px-3 py-2.5 rounded text-sm font-medium text-brandGreen-500 hover:bg-brandGreen-500 hover:text-white"><i class="fa-solid fa-globe mr-1"></i>English</button>
             </div>
         </div>
     </header>
 
-    <!-- CONTENT AREAS (SPA / TAB SWITCHING) -->
+    <!-- CONTENT AREAS -->
     <main class="flex-grow">
 
-        <!-- ==============================================
-             1. HOME (ホーム)
-             ============================================== -->
+        <!-- 1. HOME -->
         <section id="tab-home" class="tab-content block animate-fade-in">
-            <!-- ヒーローセクション：3秒で専門性と安心感、ビジョンを伝える構成 -->
-            <div class="relative bg-gradient-to-r from-brandBlue-900 via-brandBlue-800 to-brandBlue-900 text-white overflow-hidden py-20 md:py-28">
+            <!-- ヒーローセクション -->
+            <div class="relative bg-gradient-to-r from-brandBlue-900 via-brandBlue-800 to-brandBlue-900 text-white overflow-hidden py-16 md:py-24">
                 <!-- 背景の流動的装飾ライン -->
-                <div class="absolute inset-0 opacity-15">
+                <div class="absolute inset-0 opacity-15 pointer-events-none">
                     <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                         <path d="M0,40 Q25,60 50,35 T100,50 L100,100 L0,100 Z" fill="#10b981"/>
                     </svg>
@@ -136,10 +153,10 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     <!-- 左：明確なキャッチコピーと導入 -->
                     <div class="lg:col-span-7 space-y-6">
-                        <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brandGreen-500 text-white bg-opacity-95 shadow-sm">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-brandGreen-500 text-white bg-opacity-95 shadow-md">
                             <i class="fa-solid fa-graduation-cap mr-1.5"></i> スポーツ科学を「現場」へ
                         </span>
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold leading-tight tracking-tight">
+                        <h1 class="text-3.5xl sm:text-4xl lg:text-5xl font-serif font-extrabold leading-tight tracking-tight">
                             からだを知る楽しさを、<br>
                             <span class="text-brandGreen-500">地域・教育・健康づくり</span>の現場へ。
                         </h1>
@@ -147,22 +164,22 @@
                             スポーツ科学を、研究室の中だけで終わらせず、体力測定会、講演、地域活動、学生教育を通して、現場で使える形に「翻訳」しています。
                         </p>
                         <div class="flex flex-wrap gap-4 pt-3">
-                            <button onclick="switchTab('contact')" class="px-6 py-3.5 bg-brandGreen-500 text-white font-bold rounded-lg shadow-lg hover:bg-brandGreen-600 transition flex items-center gap-2">
+                            <button onclick="switchTab('contact')" class="px-6 py-3.5 bg-brandGreen-500 text-white font-bold rounded-lg shadow-lg hover:bg-brandGreen-600 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
                                 <i class="fa-solid fa-comments"></i> 講演・体力測定会を相談する
                             </button>
-                            <button onclick="switchTab('pillars')" class="px-6 py-3.5 bg-white bg-opacity-10 border border-white border-opacity-30 text-white font-semibold rounded-lg hover:bg-white hover:bg-opacity-20 transition">
+                            <button onclick="switchTab('pillars')" class="px-6 py-3.5 bg-white bg-opacity-10 border border-white border-opacity-30 text-white font-semibold rounded-lg hover:bg-white hover:bg-opacity-20 hover:scale-[1.02] active:scale-[0.98] transition-all">
                                 活動の7本柱を見る
                             </button>
                         </div>
                     </div>
                     <!-- 右：有川先生の統合的なプロファイルカード -->
-                    <div class="lg:col-span-5 bg-white bg-opacity-5 p-8 rounded-2xl border border-white border-opacity-10 backdrop-blur-md shadow-2xl">
+                    <div class="lg:col-span-5 bg-white bg-opacity-5 p-8 rounded-2xl border border-white border-opacity-10 backdrop-blur-md shadow-2xl transition hover:border-opacity-25 duration-300">
                         <div class="text-center pb-6 border-b border-white border-opacity-10">
                             <h2 class="text-2xl sm:text-3xl font-serif font-bold">有川 一 <span class="text-xs font-sans font-light text-slate-300 block sm:inline ml-1">Hajime Arikawa, Ph.D.</span></h2>
                             <p class="text-brandGreen-500 font-medium text-sm mt-1.5">中部学院大学 スポーツ健康科学部 教授</p>
                             <p class="text-slate-400 text-xs mt-1">博士（医学）／ 日本生理学会 生理学エデュケーター</p>
                         </div>
-                        <div class="py-6 space-y-3.5 text-sm text-slate-300">
+                        <div class="py-6 space-y-4 text-sm text-slate-300">
                             <div class="flex items-start gap-3">
                                 <i class="fa-solid fa-microscope text-brandGreen-500 w-5 mt-1 text-center"></i>
                                 <span><strong>研究者として：</strong> 現場の疑問から出発する呼吸生理学、運動・発声研究</span>
@@ -176,25 +193,25 @@
                                 <span><strong>地域実践者として：</strong> 自治体や企業との「楽しい」体力測定活動</span>
                             </div>
                         </div>
-                        <button onclick="switchTab('about')" class="w-full py-3 bg-brandBlue-800 text-white text-sm font-semibold rounded-lg hover:bg-brandBlue-900 transition border border-brandBlue-800 shadow">
+                        <button onclick="switchTab('about')" class="w-full py-3 bg-brandBlue-800 text-white text-sm font-semibold rounded-lg hover:bg-brandBlue-900 transition-colors border border-brandBlue-800 shadow">
                             詳しいプロフィールを読む <i class="fa-solid fa-arrow-right ml-1"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- トップページ第2セクション：何をしている人か（翻訳者としての軸） -->
+            <!-- トップページ第2セクション：何をしている人か -->
             <div class="py-20 bg-white border-b border-slate-100">
                 <div class="max-w-4xl mx-auto px-4 text-center space-y-6">
                     <span class="text-brandGreen-500 font-bold text-xs tracking-widest uppercase">Philosophy</span>
-                    <h2 class="text-2xl sm:text-4xl font-serif font-bold text-brandBlue-800">
+                    <h2 class="text-2.5xl sm:text-4xl font-serif font-bold text-brandBlue-800 leading-tight">
                         スポーツ科学を、現場で使える形に変える。
                     </h2>
                     <div class="h-1.5 w-16 bg-brandGreen-500 mx-auto rounded"></div>
                     <p class="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto font-light">
                         スポーツ科学には、アスリートだけでなく、子ども、高齢者、働く世代、地域の指導者、教育関係者に役立つ知見が多く含まれています。
                     </p>
-                    <p class="text-slate-600 leading-relaxed max-w-3xl mx-auto text-sm">
+                    <p class="text-slate-600 leading-relaxed max-w-3xl mx-auto text-sm sm:text-base">
                         私は、からだの仕組みを研究し、その知見を講演、体力測定会、健康づくり事業、学生教育の場で活かす活動を行っています。
                         特に大切にしているのは、正しい知識を伝えるだけでなく、参加者が<strong>「自分のからだを知ることは面白い」</strong>と感じられる場をつくることです。
                     </p>
@@ -211,7 +228,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <!-- カード 1: 研究者 -->
-                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition duration-300 flex flex-col justify-between">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                             <div>
                                 <div class="w-12 h-12 bg-blue-50 text-brandBlue-800 rounded-xl flex items-center justify-center text-xl mb-6">
                                     <i class="fa-solid fa-microscope"></i>
@@ -221,13 +238,13 @@
                                     運動、呼吸、発声、体力測定、健康増進をテーマに、身体の仕組みを探究しています。研究の出発点には、スポーツや地域活動の現場で生まれた素朴な疑問があります。
                                 </p>
                             </div>
-                            <button onclick="switchTab('research')" class="text-brandBlue-800 font-bold text-sm hover:text-brandGreen-500 text-left flex items-center gap-1">
-                                研究内容を見る <i class="fa-solid fa-angle-right"></i>
+                            <button onclick="switchTab('research')" class="text-brandBlue-800 font-bold text-sm hover:text-brandGreen-500 text-left flex items-center gap-1 group">
+                                研究内容を見る <i class="fa-solid fa-angle-right transition-transform group-hover:translate-x-1"></i>
                             </button>
                         </div>
 
                         <!-- カード 2: 教育者 -->
-                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition duration-300 flex flex-col justify-between">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                             <div>
                                 <div class="w-12 h-12 bg-green-50 text-brandGreen-500 rounded-xl flex items-center justify-center text-xl mb-6">
                                     <i class="fa-solid fa-users"></i>
@@ -237,13 +254,13 @@
                                     大学教育や学生プロジェクトを通して、スポーツ科学を学び、地域で実践できる人材の育成に取り組んでいます。学生が地域活動を通じて成長することも教育の核です。
                                 </p>
                             </div>
-                            <button onclick="switchTab('students')" class="text-brandBlue-800 font-bold text-sm hover:text-brandGreen-500 text-left flex items-center gap-1">
-                                学生プロジェクトを見る <i class="fa-solid fa-angle-right"></i>
+                            <button onclick="switchTab('students')" class="text-brandBlue-800 font-bold text-sm hover:text-brandGreen-500 text-left flex items-center gap-1 group">
+                                学生プロジェクトを見る <i class="fa-solid fa-angle-right transition-transform group-hover:translate-x-1"></i>
                             </button>
                         </div>
 
                         <!-- カード 3: 地域実践者 -->
-                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition duration-300 flex flex-col justify-between">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                             <div>
                                 <div class="w-12 h-12 bg-amber-50 text-brandOrange-500 rounded-xl flex items-center justify-center text-xl mb-6">
                                     <i class="fa-solid fa-people-carry-box"></i>
@@ -253,8 +270,8 @@
                                     自治体、地域スポーツクラブ、学校、健康イベント等で、講演や体力測定会を実施しています。難解な理論を、地域の皆様の健康に直接役立つ形でデリバリーします。
                                 </p>
                             </div>
-                            <button onclick="switchTab('community')" class="text-brandBlue-800 font-bold text-sm hover:text-brandGreen-500 text-left flex items-center gap-1">
-                                地域貢献・講演メニューを見る <i class="fa-solid fa-angle-right"></i>
+                            <button onclick="switchTab('community')" class="text-brandBlue-800 font-bold text-sm hover:text-brandGreen-500 text-left flex items-center gap-1 group">
+                                地域貢献・講演メニューを見る <i class="fa-solid fa-angle-right transition-transform group-hover:translate-x-1"></i>
                             </button>
                         </div>
                     </div>
@@ -264,32 +281,32 @@
             <!-- トップページ第4セクション：代表プロジェクト（EX型体力測定会） -->
             <div class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="bg-gradient-to-br from-brandBlue-50 to-white rounded-3xl p-8 md:p-14 border border-slate-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <div class="bg-gradient-to-br from-brandBlue-50 to-white rounded-3xl p-8 md:p-14 border border-slate-200 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                         <div class="lg:col-span-7 space-y-6">
-                            <span class="inline-flex items-center px-3 py-1 rounded text-xs font-bold bg-brandOrange-500 text-white">Representative Project</span>
+                            <span class="inline-flex items-center px-3 py-1 rounded text-xs font-bold bg-brandOrange-500 text-white shadow-sm">Representative Project</span>
                             <h2 class="text-3xl font-serif font-bold text-brandBlue-800">
                                 EX型体力測定会キャラバン
                             </h2>
-                            <p class="text-slate-600 text-sm leading-relaxed">
-                                体力測定を、単なる評価やつらい「検査」ではなく、楽しみながら自分のからだを知る「健康エンタメイベント」に変革する取り組みです。
+                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                                体力測定を、単なる評価やつらい「検査」ではなく、楽しみながら自分のからだを知る「健康エンターテインメントイベント」に変革する取り組みです。
                             </p>
-                            <p class="text-slate-600 text-sm leading-relaxed font-bold">
+                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-bold border-l-4 border-brandOrange-500 pl-3">
                                 「正しいから参加する」のではなく、「楽しそうだから参加してみる」。<br>
                                 その入り口から、自発的な健康づくりや生涯の運動習慣化のきっかけをつくります。
                             </p>
                             <div class="pt-3">
-                                <button onclick="switchTab('ex-fitness')" class="px-6 py-3 bg-brandBlue-800 text-white font-bold rounded-lg hover:bg-brandBlue-900 transition shadow">
+                                <button onclick="switchTab('ex-fitness')" class="px-6 py-3 bg-brandBlue-800 text-white font-bold rounded-lg hover:bg-brandBlue-900 hover:scale-[1.02] active:scale-[0.98] transition-all shadow shadow-md">
                                     EX型体力測定会の詳細・実績を見る
                                 </button>
                             </div>
                         </div>
-                        <div class="lg:col-span-5 h-64 md:h-80 bg-slate-100 rounded-2xl overflow-hidden shadow-inner flex items-center justify-center text-slate-400 relative">
-                            <!-- プレースホルダーグラフィック / 写真想定 -->
-                            <div class="text-center p-6">
-                                <i class="fa-solid fa-people-group text-6xl text-brandGreen-500 mb-4 animate-bounce"></i>
-                                <p class="text-sm text-slate-600 font-bold">EX（Entertainment Transformation）の現場</p>
-                                <p class="text-xs text-slate-400 mt-1">学生スタッフと地域住民が笑顔で交流する体力測定イベント</p>
-                            </div>
+                        <!-- リッチなイラストレーターSVG -->
+                        <div class="lg:col-span-5 h-64 md:h-80 bg-gradient-to-tr from-slate-100 to-white rounded-2xl overflow-hidden shadow-inner flex flex-col items-center justify-center relative p-6 border border-slate-200">
+                            <svg class="w-32 h-32 text-brandGreen-500 mb-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                            </svg>
+                            <p class="text-sm text-slate-700 font-bold">EX（Entertainment Transformation）</p>
+                            <p class="text-xs text-slate-400 mt-1 text-center">学生と地域のみなさんが笑顔で繋がる新しい体力測定</p>
                         </div>
                     </div>
                 </div>
@@ -301,41 +318,41 @@
                     <div class="text-center max-w-3xl mx-auto mb-16">
                         <span class="text-brandGreen-500 font-bold text-xs tracking-widest uppercase">7 Pillars</span>
                         <h2 class="text-3xl font-serif font-bold text-white mt-1">活動を支える7つの考え方</h2>
-                        <p class="text-slate-400 mt-2 text-sm">すべての活動の根底にある、実名ブランド共通の思想・哲学です。</p>
+                        <p class="text-slate-400 mt-2 text-sm">すべての活動の根底にある、共通の思想・哲学です。</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 text-slate-300">
-                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700">
+                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 transition hover:bg-opacity-80">
                             <span class="text-brandGreen-500 font-bold text-lg">01</span>
                             <h4 class="font-bold text-white mt-2 text-sm">体力測定を楽しい体験に</h4>
                         </div>
-                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700">
+                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 transition hover:bg-opacity-80">
                             <span class="text-brandGreen-500 font-bold text-lg">02</span>
                             <h4 class="font-bold text-white mt-2 text-sm">からだの可視化が行動変容の鍵</h4>
                         </div>
-                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700">
+                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 transition hover:bg-opacity-80">
                             <span class="text-brandGreen-500 font-bold text-lg">03</span>
                             <h4 class="font-bold text-white mt-2 text-sm">スポーツ科学は全世代のもの</h4>
                         </div>
-                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700">
+                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 transition hover:bg-opacity-80">
                             <span class="text-brandGreen-500 font-bold text-lg">04</span>
                             <h4 class="font-bold text-white mt-2 text-sm">中高年・働く世代の体力の見える化</h4>
                         </div>
-                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700">
+                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 transition hover:bg-opacity-80">
                             <span class="text-brandGreen-500 font-bold text-lg">05</span>
                             <h4 class="font-bold text-white mt-2 text-sm">学生は地域現場で自立・成長する</h4>
                         </div>
-                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700">
+                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 transition hover:bg-opacity-80">
                             <span class="text-brandGreen-500 font-bold text-lg">06</span>
                             <h4 class="font-bold text-white mt-2 text-sm">研究は現場のリアルな疑問から</h4>
                         </div>
-                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 md:col-span-2 lg:col-span-1">
+                        <div class="p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 transition hover:bg-opacity-80 md:col-span-2 lg:col-span-1">
                             <span class="text-brandGreen-500 font-bold text-lg">07</span>
                             <h4 class="font-bold text-white mt-2 text-sm">健康づくりに必要なのは楽しさ</h4>
                         </div>
-                        <div class="p-6 bg-brandBlue-800 rounded-xl flex items-center justify-center md:col-span-2 lg:col-span-1">
-                            <button onclick="switchTab('pillars')" class="text-white font-bold text-sm hover:underline flex items-center gap-2">
-                                7つの柱を詳しく読む <i class="fa-solid fa-arrow-right"></i>
+                        <div class="p-6 bg-brandBlue-800 rounded-xl flex items-center justify-center md:col-span-2 lg:col-span-1 hover:bg-brandBlue-700 transition">
+                            <button onclick="switchTab('pillars')" class="text-white font-bold text-sm hover:underline flex items-center gap-2 group">
+                                7つの柱を詳しく読む <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
                             </button>
                         </div>
                     </div>
@@ -343,14 +360,14 @@
             </div>
 
             <!-- クイック相談セクション -->
-            <div class="bg-brandBlue-800 text-white py-16 text-center">
+            <div class="bg-[#01254d] text-white py-16 text-center">
                 <div class="max-w-4xl mx-auto px-4 space-y-6">
                     <h3 class="text-2xl sm:text-3xl font-serif font-bold">お気軽にご相談・お問い合わせください</h3>
                     <p class="text-slate-300 text-sm max-w-2xl mx-auto leading-relaxed">
                         自治体の健康フェア、学校PTA、スポーツ少年団研修、企業の健康づくりイベントなど、目的・予算に合わせた最適な講演や測定会をご提案・調整いたします。
                     </p>
                     <div class="pt-2">
-                        <button onclick="switchTab('contact')" class="px-8 py-4 bg-brandGreen-500 text-white font-bold rounded-lg shadow-lg hover:bg-brandGreen-600 transition tracking-wider">
+                        <button onclick="switchTab('contact')" class="px-8 py-4 bg-brandGreen-500 text-white font-bold rounded-lg shadow-lg hover:bg-brandGreen-600 transition-colors tracking-wider">
                             講演・測定会を相談する <i class="fa-solid fa-paper-plane ml-1"></i>
                         </button>
                     </div>
@@ -359,9 +376,7 @@
         </section>
 
 
-        <!-- ==============================================
-             2. ABOUT (有川 一について)
-             ============================================== -->
+        <!-- 2. ABOUT -->
         <section id="tab-about" class="tab-content hidden py-16 bg-white animate-fade-in">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
                 <!-- タイトル -->
@@ -372,16 +387,16 @@
                     </h2>
                 </div>
 
-                <!-- 導入：身近に感じるスポーツ科学 -->
+                <!-- 導入文：身近に感じるスポーツ科学 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                     <div class="md:col-span-7 space-y-6">
                         <h3 class="text-2xl font-serif font-bold text-slate-900 leading-tight">
                             スポーツ科学を、もっと身近に。
                         </h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
                             私は、スポーツ科学・生理学を専門とする大学教員です。研究、教育、地域貢献の3つを軸に、からだの仕組みをわかりやすく伝え、地域の健康づくりやスポーツ活動に役立てることを目指しています。
                         </p>
-                        <p class="text-slate-600 text-sm leading-relaxed">
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
                             スポーツ科学は、アスリートや専門家だけのものではありません。
                             自分の体力を知ること、身体を動かしたときに生理学的に何が起きているかを知ること、健康づくりを無理なく続けること。そのすべてのステップに、科学の知識は驚くほど役立ちます。
                         </p>
@@ -390,46 +405,46 @@
                         <h4 class="font-bold text-brandBlue-800 flex items-center gap-2">
                             <i class="fa-solid fa-star text-brandGreen-500"></i> 研究者・教育者・実践者の統合
                         </h4>
-                        <p class="text-xs text-slate-600 leading-relaxed">
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             地域の現場で体力測定会や講演を行うと、多くの人が「自分のからだのことを意外と知らない」ことに気づきます。
-                            一方で、数値や専門用語だけを突きつけても、それが自発的な行動変容につながるとは限りません。
+                            一方での数値や専門用語だけを突きつけても、それが自発的な行動変容につながるとは限りません。
                             大切なのは、からだを知ることを、楽しく、わかりやすく、自分ごととして受け止められるように届けることです。
                         </p>
                     </div>
                 </div>
 
                 <!-- 基本プロファイル情報 -->
-                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 text-sm space-y-4">
-                    <h3 class="font-bold text-brandBlue-800 text-base flex items-center gap-2">
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 text-sm sm:text-base space-y-4">
+                    <h3 class="font-bold text-brandBlue-800 text-base sm:text-lg flex items-center gap-2">
                         <i class="fa-solid fa-id-card text-brandGreen-500"></i> 基本情報
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 pt-2">
                         <div class="space-y-3">
                             <div class="flex border-b border-slate-200 pb-2">
-                                <span class="w-24 text-slate-500 font-bold">氏名</span>
+                                <span class="w-24 text-slate-500 font-bold shrink-0">氏名</span>
                                 <span class="text-slate-800 font-bold">有川 一（Hajime Arikawa, Ph.D.）</span>
                             </div>
                             <div class="flex border-b border-slate-200 pb-2">
-                                <span class="w-24 text-slate-500 font-bold">所属 / 職位</span>
+                                <span class="w-24 text-slate-500 font-bold shrink-0">所属 / 職位</span>
                                 <span class="text-slate-800">中部学院大学 スポーツ健康科学部 教授</span>
                             </div>
                             <div class="flex border-b border-slate-200 pb-2">
-                                <span class="w-24 text-slate-500 font-bold">学位</span>
+                                <span class="w-24 text-slate-500 font-bold shrink-0">学位</span>
                                 <span class="text-slate-800">博士（医学）（岐阜大学大学院医学系研究科）</span>
                             </div>
                         </div>
                         <div class="space-y-3">
                             <div class="flex border-b border-slate-200 pb-2">
-                                <span class="w-24 text-slate-500 font-bold">認定・資格</span>
+                                <span class="w-24 text-slate-500 font-bold shrink-0">認定・資格</span>
                                 <span class="text-slate-800">日本生理学会 生理学エデュケーター</span>
                             </div>
                             <div class="flex border-b border-slate-200 pb-2">
-                                <span class="w-24 text-slate-500 font-bold">専門分野</span>
+                                <span class="w-24 text-slate-500 font-bold shrink-0">専門分野</span>
                                 <span class="text-slate-800">スポーツ生理学、運動生理学、健康増進、体力測定</span>
                             </div>
                             <div class="flex border-b border-slate-200 pb-2">
-                                <span class="w-24 text-slate-500 font-bold">地域活動</span>
-                                <span class="text-slate-800">総合型クラブ「中部学院大学スポーツカレッジ」副理事長</span>
+                                <span class="w-24 text-slate-500 font-bold shrink-0">地域活動</span>
+                                <span class="text-slate-800">総合型クラブ「中部学院大学スポーツカレッジ」理事長</span>
                             </div>
                         </div>
                     </div>
@@ -440,37 +455,37 @@
                     <h3 class="text-xl font-bold text-brandBlue-800 flex items-center gap-2">
                         <i class="fa-solid fa-clock-rotate-left text-brandGreen-500"></i> 現在の活動に至る歩み（ストーリー）
                     </h3>
-                    <div class="relative border-l-2 border-brandBlue-100 ml-3 pl-8 space-y-8 text-sm">
-                        <div>
+                    <div class="relative border-l-2 border-brandBlue-100 ml-3 pl-8 space-y-8 text-sm sm:text-base">
+                        <div class="relative">
                             <div class="absolute -left-[41px] top-1.5 bg-brandGreen-500 w-4 h-4 rounded-full border-4 border-white shadow"></div>
                             <h4 class="font-bold text-brandBlue-800">1. 体育・生理学研究の原点</h4>
                             <p class="text-xs text-brandGreen-600 font-semibold mb-1">筑波大学 体育専門学群 卒業</p>
-                            <p class="text-slate-600 leading-relaxed max-w-3xl">
-                                筑波大学でスポーツと科学の高度な統合を学ぶ。自ら身体を動かして実験を行い、心拍や筋肉、呼吸の変化をデータ化し分析する面白さに没頭したことが、現在の研究者としての基盤となっています。
+                            <p class="text-slate-600 leading-relaxed max-w-3xl text-sm sm:text-base">
+                                所属したスポーツ医学研究室でスポーツと科学の高度な統合を学ぶ。自ら身体を動かして実験を行い、心拍や筋肉、呼吸の変化をデータ化し分析する面白さに没頭したことが、現在の研究者としての基盤となっています。
                             </p>
                         </div>
-                        <div>
+                        <div class="relative">
                             <div class="absolute -left-[41px] top-1.5 bg-brandGreen-500 w-4 h-4 rounded-full border-4 border-white shadow"></div>
                             <h4 class="font-bold text-brandBlue-800">2. 高校保健体育教員としての現場体験・葛藤</h4>
                             <p class="text-xs text-brandGreen-600 font-semibold mb-1">岐阜県内高校での教諭時代（岐阜北高、土岐商業高など）</p>
-                            <p class="text-slate-600 leading-relaxed max-w-3xl">
+                            <p class="text-slate-600 leading-relaxed max-w-3xl text-sm sm:text-base">
                                 現場の「体育嫌い」「運動嫌い」の子どもたちの増加や、基礎体力の著しい低下の問題に直接向き合いました。ここで「難解な教科書的理論ではなく、身体を動かして心から楽しいと思わせるアプローチ」の必要性を痛感しました。
                             </p>
                         </div>
-                        <div>
+                        <div class="relative">
                             <div class="absolute -left-[41px] top-1.5 bg-brandGreen-500 w-4 h-4 rounded-full border-4 border-white shadow"></div>
                             <h4 class="font-bold text-brandBlue-800">3. 幼児教育・親子運動遊びへの展開</h4>
                             <p class="text-xs text-brandGreen-600 font-semibold mb-1">中部学院大学短期大学部 幼児教育学科での准教授時代</p>
-                            <p class="text-slate-600 leading-relaxed max-w-3xl">
-                                幼児期における身体の発達や、「運動遊び」がもたらす教育・生理的効果、親子でのサークル活動など、地域と一体となった幼児体力支援に深く携わるようになりました。
+                            <p class="text-slate-600 leading-relaxed max-w-3xl text-sm sm:text-base">
+                                幼児期における身体の発達や、「運動遊び」がもたらす教育・生理的効果、親子でのサークル活動など、地域と一体となった子ども家庭支援に深く携わるようになりました。
                             </p>
                         </div>
-                        <div>
+                        <div class="relative">
                             <div class="absolute -left-[41px] top-1.5 bg-brandGreen-500 w-4 h-4 rounded-full border-4 border-white shadow"></div>
                             <h4 class="font-bold text-brandBlue-800">4. 生理学研究の高度化と現在の「社会実装」へ</h4>
                             <p class="text-xs text-brandGreen-600 font-semibold mb-1">博士（医学）学位取得、スポーツ健康科学部 教授</p>
-                            <p class="text-slate-600 leading-relaxed max-w-3xl">
-                                岐阜大学大学院医学系研究科を修了し、医学的な視点から呼吸・発声・全身運動の研究を深めました。現在は教授を務めながら、学術的な生理学の高度な成果を、地域住民や現場の指導者に極めて分かりやすく伝える活動に注力しています。
+                            <p class="text-slate-600 leading-relaxed max-w-3xl text-sm sm:text-base">
+                                岐阜大学大学院医学系研究科を修了し、医学的な視点から呼吸・発声・全身運動の研究を深めました。現在は教授を務めながら、学術的な生理学の高度な成果を、地域住民や現場 of 指導者に極めて分かりやすく伝える活動に注力しています。
                             </p>
                         </div>
                     </div>
@@ -482,27 +497,25 @@
                         <h4 class="text-xl font-bold text-brandOrange-600 flex items-center gap-2">
                             <i class="fa-solid fa-lightbulb"></i> 目指しているのは、スポーツ科学界の「でんじろう先生」
                         </h4>
-                        <p class="text-sm text-slate-700 leading-relaxed">
+                        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
                             スポーツ科学は、本来とても面白く感動的な学問です。しかし、専門用語や複雑な数値だけで語られると、一般の方には難しく感じられて距離ができてしまいます。
                         </p>
-                        <p class="text-sm text-slate-700 leading-relaxed">
-                            私は、簡単な実験やデモンストレーション、測定、実際に身体を動かす楽しい体験を通して、科学を**「見てわかる」「やって納得できる」もの**として伝える、まるで科学の実験ショーのような発信を理想としています。
+                        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                            私は、簡単な実験やデモンストレーション、測定、実際に身体を動かす楽しい体験を通して、科学を<strong class="font-bold text-brandOrange-600">「見てわかる」「やって納得できる」もの</strong>として伝える、まるで科学の実験ショーのような発信を理想としています。
                         </p>
                         <p class="text-xs text-slate-500 leading-relaxed italic">
                             ※もちろん、単に楽しいだけではなく、大学教員・医学系研究者としての科学的専門性に基づき、正確でエビデンスのある役に立つ知見を届けることを最優先にしています。
                         </p>
                     </div>
-                    <div class="md:col-span-4 flex justify-center">
-                        <span class="text-brandOrange-500 text-8xl opacity-75"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                    <div class="md:col-span-4 flex justify-center text-brandOrange-500 text-8xl opacity-75">
+                        <i class="fa-solid fa-wand-magic-sparkles animate-pulse"></i>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <!-- ==============================================
-             3. PILLARS (活動の7本柱)
-             ============================================== -->
+        <!-- 3. PILLARS -->
         <section id="tab-pillars" class="tab-content hidden py-16 bg-slate-50 animate-fade-in">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <!-- タイトル -->
@@ -520,7 +533,7 @@
                 <!-- 7本柱詳細グリッド -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
                     <!-- 柱 1 -->
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-lg transition-all duration-300">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-full bg-brandGreen-50 text-brandGreen-500 font-bold flex items-center justify-center text-sm">1</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">体力測定を楽しい体験に変える</h3>
@@ -531,7 +544,7 @@
                     </div>
 
                     <!-- 柱 2 -->
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-lg transition-all duration-300">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-full bg-brandGreen-50 text-brandGreen-500 font-bold flex items-center justify-center text-sm">2</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">からだを知ることが行動変容の第一歩</h3>
@@ -542,7 +555,7 @@
                     </div>
 
                     <!-- 柱 3 -->
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-lg transition-all duration-300">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-full bg-brandGreen-50 text-brandGreen-500 font-bold flex items-center justify-center text-sm">3</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">スポーツ科学は全世代のもの</h3>
@@ -553,7 +566,7 @@
                     </div>
 
                     <!-- 柱 4 -->
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-lg transition-all duration-300">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-full bg-brandGreen-50 text-brandGreen-500 font-bold flex items-center justify-center text-sm">4</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">中高年・働く世代にこそ見える化が必要</h3>
@@ -564,7 +577,7 @@
                     </div>
 
                     <!-- 柱 5 -->
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-lg transition-all duration-300">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-full bg-brandGreen-50 text-brandGreen-500 font-bold flex items-center justify-center text-sm">5</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">学生は地域活動を通じて大きく成長する</h3>
@@ -575,18 +588,18 @@
                     </div>
 
                     <!-- 柱 6 -->
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-lg transition-all duration-300">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-full bg-brandGreen-50 text-brandGreen-500 font-bold flex items-center justify-center text-sm">6</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">研究は現場のリアルな疑問から始まる</h3>
                         </div>
                         <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                            私の研究は、論文を書くための机上の空論からではなく、スポーツ指導の現場、授業中の発見、体力測定中の気づきから生まれます。武道運動の発声生理や、楽しく測定を続ける仕掛けなど、常に現場の疑問を科学的に探究・検証し、再び現場に還元しています。
+                            私の研究は、論文を書くための机上の空論からではなく、スポーツ指導の現場、授業中の発見、体力測定中の気づきから生まれます。剣道の発声生理や、楽しく測定を続ける仕掛けなど、常に現場の疑問を科学的に探究・検証し、再び現場に還元しています。
                         </p>
                     </div>
 
                     <!-- 柱 7 -->
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-md transition md:col-span-2">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-3 hover:shadow-lg transition-all duration-300 md:col-span-2">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-full bg-brandGreen-50 text-brandGreen-500 font-bold flex items-center justify-center text-sm">7</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">健康づくりには「正しさ」だけでなく「楽しさ」が必要</h3>
@@ -600,9 +613,7 @@
         </section>
 
 
-        <!-- ==============================================
-             4. RESEARCH (研究)
-             ============================================== -->
+        <!-- 4. RESEARCH -->
         <section id="tab-research" class="tab-content hidden py-16 bg-white animate-fade-in">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
                 <!-- タイトル -->
@@ -614,14 +625,14 @@
                         </h2>
                     </div>
                     <div class="mt-4 md:mt-0">
-                        <a href="https://researchmap.jp/arikawahajime" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-brandBlue-800 text-white rounded hover:bg-brandBlue-900 font-semibold text-xs inline-flex items-center gap-2 shadow-sm">
+                        <a href="https://researchmap.jp/arikawahajime" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-brandBlue-800 text-white rounded hover:bg-brandBlue-900 font-semibold text-xs inline-flex items-center gap-2 shadow-sm transition hover:scale-[1.02] active:scale-[0.98]">
                             <i class="fa-solid fa-up-right-from-square"></i> researchmap 業績一覧を見る
                         </a>
                     </div>
                 </div>
 
                 <!-- 導入文 -->
-                <p class="text-slate-600 text-sm leading-relaxed max-w-4xl">
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-4xl">
                     私の研究は、運動中の身体反応、呼吸・発声、体力測定、健康増進活動などを中心に展開しています。
                     研究で得られた知見を、教育、地域貢献、講演、体力測定会に活かし、スポーツ科学を社会に還元することを重視しています。正式な学術論文リストは上記の researchmap リンクをご活用ください。
                 </p>
@@ -629,7 +640,7 @@
                 <!-- 4つの主要研究テーマ -->
                 <div class="space-y-12">
                     <!-- テーマ 1 -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-8 items-center hover:shadow-md transition">
                         <div class="md:col-span-8 space-y-4">
                             <span class="px-3 py-1 bg-blue-100 text-brandBlue-800 font-bold rounded text-xs">研究テーマ 1</span>
                             <h3 class="text-xl font-serif font-bold text-brandBlue-800">
@@ -647,25 +658,25 @@
                     </div>
 
                     <!-- テーマ 2 -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-8 items-center hover:shadow-md transition">
                         <div class="md:col-span-8 space-y-4">
                             <span class="px-3 py-1 bg-blue-100 text-brandBlue-800 font-bold rounded text-xs">研究テーマ 2</span>
                             <h3 class="text-xl font-serif font-bold text-brandBlue-800">
-                                鼻音発声・$\text{FeNO}$・低酸素環境における生理反応
+                                鼻音を伴う発声による生理反応
                             </h3>
                             <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                                ハミングや鼻音、特定の鼻発声は、鼻腔や副鼻腔における独自の生理反応を引き起こします。本研究では、それらの発声が呼気一酸化窒素（$\text{FeNO}$）の動態や血中酸素化レベルに及ぼす影響を探索しています。発声・呼吸・気道生理という一見離れて見える要素を、運動生理学の視点から結びつける基礎研究です。
+                                ハミングや鼻音の発声は、副鼻腔における独自の生理反応を引き起こします。本研究では、それらの発声が呼気一酸化窒素（$\text{FeNO}$）の動態や血中酸素化レベルに及ぼす影響を探索しています。発声・呼吸・気道生理という一見離れて見える要素を、運動生理学の視点から結びつける基礎研究です。
                             </p>
                         </div>
                         <div class="md:col-span-4 bg-white p-6 rounded-xl shadow-inner border border-slate-200 text-center text-slate-500">
                             <i class="fa-solid fa-vial text-4xl text-brandGreen-500 mb-2"></i>
-                            <p class="text-xs font-bold text-slate-700">気道一酸化窒素計測</p>
-                            <p class="text-[11px] text-slate-400 mt-1">鼻発声と $\text{FeNO}$ 動態の探索</p>
+                            <p class="text-xs font-bold text-slate-700">呼気一酸化窒素計測</p>
+                            <p class="text-[11px] text-slate-400 mt-1">鼻音の発声と $\text{FeNO}$ 動態の探索</p>
                         </div>
                     </div>
 
                     <!-- テーマ 3 -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-8 items-center hover:shadow-md transition">
                         <div class="md:col-span-8 space-y-4">
                             <span class="px-3 py-1 bg-blue-100 text-brandBlue-800 font-bold rounded text-xs">研究テーマ 3</span>
                             <h3 class="text-xl font-serif font-bold text-brandBlue-800">
@@ -683,7 +694,7 @@
                     </div>
 
                     <!-- テーマ 4 -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-8 items-center hover:shadow-md transition">
                         <div class="md:col-span-8 space-y-4">
                             <span class="px-3 py-1 bg-blue-100 text-brandBlue-800 font-bold rounded text-xs">研究テーマ 4</span>
                             <h3 class="text-xl font-serif font-bold text-brandBlue-800">
@@ -702,18 +713,18 @@
                 </div>
 
                 <!-- 主要業績の略記 -->
-                <div class="bg-white rounded-2xl p-8 border border-slate-200 space-y-4">
-                    <h3 class="font-bold text-brandBlue-800 text-base flex items-center gap-2">
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 space-y-4 shadow-sm">
+                    <h3 class="font-bold text-brandBlue-800 text-base sm:text-lg flex items-center gap-2">
                         <i class="fa-solid fa-award text-brandGreen-500"></i> 代表的な主要研究テーマ例
                     </h3>
-                    <ul class="space-y-3 text-xs sm:text-sm text-slate-600">
+                    <ul class="space-y-3.5 text-xs sm:text-sm text-slate-600">
                         <li class="flex items-start gap-2">
                             <span class="text-brandGreen-500 mt-1"><i class="fa-solid fa-circle-check"></i></span>
                             <span>剣道運動中の発声が換気活動、二酸化炭素（$\text{CO}_2$）排出、自覚的負担度に与える研究</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="text-brandGreen-500 mt-1"><i class="fa-solid fa-circle-check"></i></span>
-                            <span>地域在住高齢者を対象とした経年的「EX型エンタメ体力測定」の健康波及効果</span>
+                            <span>地域在住高齢者を対象とした経年的「EX型体力測定」の健康波及効果</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="text-brandGreen-500 mt-1"><i class="fa-solid fa-circle-check"></i></span>
@@ -729,9 +740,7 @@
         </section>
 
 
-        <!-- ==============================================
-             5. COMMUNITY (地域貢献・講演)
-             ============================================== -->
+        <!-- 5. COMMUNITY -->
         <section id="tab-community" class="tab-content hidden py-16 bg-white animate-fade-in">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
                 <!-- タイトル -->
@@ -748,15 +757,15 @@
                 <!-- 依頼メニュー（カード形式） -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- メニュー 1 -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4 hover:shadow-md transition">
                         <div class="flex items-center gap-3">
-                            <span class="w-10 h-10 bg-brandBlue-800 text-white rounded-xl flex items-center justify-center text-sm font-bold">1</span>
+                            <span class="w-10 h-10 bg-brandBlue-800 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-sm">1</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">一般・高齢者・勤労者向け健康講演</h3>
                         </div>
-                        <p class="text-xs text-slate-500">
+                        <p class="text-xs sm:text-sm text-slate-500">
                             元気に、いきいきと暮らすための運動の習慣、フレイル（加齢衰弱）予防、自分の体力データに基づいた健康づくりの方法を学べる講演です。
                         </p>
-                        <ul class="space-y-2 text-xs text-slate-700 font-medium bg-white p-4 rounded-xl border border-slate-200">
+                        <ul class="space-y-2 text-xs sm:text-sm text-slate-700 font-medium bg-white p-4 rounded-xl border border-slate-200">
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> からだを知ることから始める健康づくり</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 運動すると身体で何が起きる？（生理学の楽しさ）</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 無理なく、楽しく続ける運動習慣化の心理学</li>
@@ -765,32 +774,32 @@
                     </div>
 
                     <!-- メニュー 2 -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4 hover:shadow-md transition">
                         <div class="flex items-center gap-3">
-                            <span class="w-10 h-10 bg-brandBlue-800 text-white rounded-xl flex items-center justify-center text-sm font-bold">2</span>
+                            <span class="w-10 h-10 bg-brandBlue-800 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-sm">2</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">地域スポーツクラブ・指導者向け研修</h3>
                         </div>
-                        <p class="text-xs text-slate-500">
+                        <p class="text-xs sm:text-sm text-slate-500">
                             指導者自身がまず正しい生理・身体機能を学び、非科学的な「根性論」や暴力、ハラスメントに頼らずにモチベーションを高める指導方法を共有します。
                         </p>
-                        <ul class="space-y-2 text-xs text-slate-700 font-medium bg-white p-4 rounded-xl border border-slate-200">
+                        <ul class="space-y-2 text-xs sm:text-sm text-slate-700 font-medium bg-white p-4 rounded-xl border border-slate-200">
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> スポーツ科学を現場の指導に翻訳して活かす</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> ジュニア期の発育発達に適した適切な運動指導</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 叱る指導からの脱却：選手のやる気（自律性）を引き出す</li>
-                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 指導者が絶対に知っておきたい身体負荷の仕組み</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 指難者が絶対に知っておきたい身体負荷の仕組み</li>
                         </ul>
                     </div>
 
                     <!-- メニュー 3 -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4 hover:shadow-md transition">
                         <div class="flex items-center gap-3">
-                            <span class="w-10 h-10 bg-brandBlue-800 text-white rounded-xl flex items-center justify-center text-sm font-bold">3</span>
+                            <span class="w-10 h-10 bg-brandBlue-800 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-sm">3</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">学校・PTA・教員・学生向け講演</h3>
                         </div>
-                        <p class="text-xs text-slate-500">
+                        <p class="text-xs sm:text-sm text-slate-500">
                             脳の発達や学習効率、子どもの体力の変遷などを、スポーツ生理学・脳科学的視点から、分かりやすい実験デモを交えて語ります。
                         </p>
-                        <ul class="space-y-2 text-xs text-slate-700 font-medium bg-white p-4 rounded-xl border border-slate-200">
+                        <ul class="space-y-2 text-xs sm:text-sm text-slate-700 font-medium bg-white p-4 rounded-xl border border-slate-200">
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 子どもの基礎体力問題と、家庭での「遊び運動」の役割</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 文武両道を科学する：運動と学習・集中力の関係</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> プレゼンテーション技術：人に伝える、伝わる話し方</li>
@@ -798,15 +807,15 @@
                     </div>
 
                     <!-- メニュー 4 -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4 hover:shadow-md transition">
                         <div class="flex items-center gap-3">
-                            <span class="w-10 h-10 bg-brandBlue-800 text-white rounded-xl flex items-center justify-center text-sm font-bold">4</span>
+                            <span class="w-10 h-10 bg-brandBlue-800 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-sm">4</span>
                             <h3 class="text-lg font-bold text-brandBlue-800">EX型体力測定会・市民健康イベント</h3>
                         </div>
-                        <p class="text-xs text-slate-500">
+                        <p class="text-xs sm:text-sm text-slate-500">
                             中部学院大学スポーツ健康科学科の「学生プロジェクト」チームとともに出張測定会を企画運営します。元気な雰囲気で測定を行い、納得の結果票をお渡しします。
                         </p>
-                        <ul class="space-y-2 text-xs text-slate-700 font-medium bg-white p-4 rounded-xl border border-slate-200">
+                        <ul class="space-y-2 text-xs sm:text-sm text-slate-700 font-medium bg-white p-4 rounded-xl border border-slate-200">
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 高齢者新体力テスト、一般向け簡易体力テスト</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> 全身反応時間（素早さ）、立ち幅跳び、長座前屈などの計測</li>
                             <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-right text-brandGreen-500"></i> その場での「体力年齢算出結果票」の進呈と健康助言</li>
@@ -816,50 +825,50 @@
 
                 <!-- 相談エンカレッジ -->
                 <div class="bg-brandBlue-50 p-6 rounded-2xl border border-brandBlue-100 text-center space-y-2">
-                    <p class="font-bold text-brandBlue-800 text-sm">※まだ具体的にプランや日時・予算が決まっていなくても全く問題ありません</p>
-                    <p class="text-xs text-slate-600 leading-relaxed max-w-3xl mx-auto">
+                    <p class="font-bold text-brandBlue-800 text-sm sm:text-base">※まだ具体的にプランや日時・予算が決まっていなくても全く問題ありません</p>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto">
                         地域の課題（例：運動離れ、フレイル、少年団指導への不満、等）や、対象者のニーズ（高齢者、小中学生、一般社員等）に合わせて、講演・実技測定などを柔軟に組み合わせたオーダーメイドプランをご提案いたします。
                     </p>
                 </div>
 
                 <!-- 相談の流れステップ -->
                 <div class="space-y-6">
-                    <h3 class="text-lg font-bold text-brandBlue-800 text-center">ご相談から当日までの流れ</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-xs text-center">
-                        <div class="p-4 bg-white border border-slate-200 rounded-xl">
-                            <span class="font-bold text-brandGreen-500 text-base">Step 1</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-brandBlue-800 text-center">ご相談から当日までの流れ</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-xs sm:text-sm text-center">
+                        <div class="p-5 bg-white border border-slate-200 rounded-xl hover:shadow transition">
+                            <span class="font-bold text-brandGreen-500 text-base sm:text-lg">Step 1</span>
                             <h4 class="font-bold text-brandBlue-800 mt-1">ご相談</h4>
-                            <p class="text-slate-500 mt-1.5">お問い合わせフォームより、大体の希望や想定対象をお知らせください。</p>
+                            <p class="text-slate-500 mt-1.5 text-xs">お問い合わせフォームより、大体の希望や想定対象をお知らせください。</p>
                         </div>
-                        <div class="p-4 bg-white border border-slate-200 rounded-xl">
-                            <span class="font-bold text-brandGreen-500 text-base">Step 2</span>
+                        <div class="p-5 bg-white border border-slate-200 rounded-xl hover:shadow transition">
+                            <span class="font-bold text-brandGreen-500 text-base sm:text-lg">Step 2</span>
                             <h4 class="font-bold text-brandBlue-800 mt-1">ヒアリング</h4>
-                            <p class="text-slate-500 mt-1.5">対面、メール、またはオンラインにてご要望やご予算、必要な測定器を相談します。</p>
+                            <p class="text-slate-500 mt-1.5 text-xs">対面、メール、またはオンラインにてご要望やご予算、必要な測定器を相談します。</p>
                         </div>
-                        <div class="p-4 bg-white border border-slate-200 rounded-xl">
-                            <span class="font-bold text-brandGreen-500 text-base">Step 3</span>
+                        <div class="p-5 bg-white border border-slate-200 rounded-xl hover:shadow transition">
+                            <span class="font-bold text-brandGreen-500 text-base sm:text-lg">Step 3</span>
                             <h4 class="font-bold text-brandBlue-800 mt-1">企画確定</h4>
-                            <p class="text-slate-500 mt-1.5">確定した内容に応じ、測定機材や学生プロジェクトのサポートメンバーを調整します。</p>
+                            <p class="text-slate-500 mt-1.5 text-xs">確定した内容に応じ、測定機材や学生プロジェクトのサポートメンバーを調整します。</p>
                         </div>
-                        <div class="p-4 bg-white border border-slate-200 rounded-xl">
-                            <span class="font-bold text-brandGreen-500 text-base">Step 4</span>
+                        <div class="p-5 bg-white border border-slate-200 rounded-xl hover:shadow transition">
+                            <span class="font-bold text-brandGreen-500 text-base sm:text-lg">Step 4</span>
                             <h4 class="font-bold text-brandBlue-800 mt-1">当日実施</h4>
-                            <p class="text-slate-500 mt-1.5">有川と学生スタッフが現場に伺い、感動のある講演・イベントを熱量高く実施。</p>
+                            <p class="text-slate-500 mt-1.5 text-xs">有川と学生スタッフが現場に伺い、感動のある講演・イベントを熱量高く実施。</p>
                         </div>
-                        <div class="p-4 bg-white border border-slate-200 rounded-xl">
-                            <span class="font-bold text-brandGreen-500 text-base">Step 5</span>
+                        <div class="p-5 bg-white border border-slate-200 rounded-xl hover:shadow transition">
+                            <span class="font-bold text-brandGreen-500 text-base sm:text-lg">Step 5</span>
                             <h4 class="font-bold text-brandBlue-800 mt-1">健康づくり</h4>
-                            <p class="text-slate-500 mt-1.5">体験を振り返り、次回に向けたアドバイス、今後の健康継続を後押しします。</p>
+                            <p class="text-slate-500 mt-1.5 text-xs">体験を振り返り、次回に向けたアドバイス、今後の健康継続を後押しします。</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 問い合わせボタン（主要動線） -->
+                <!-- 問い合わせボタン -->
                 <div class="flex flex-wrap justify-center gap-4 pt-4">
-                    <button onclick="switchTab('contact')" class="px-6 py-3 bg-brandGreen-500 text-white font-bold rounded hover:bg-brandGreen-600 transition shadow">
+                    <button onclick="switchTab('contact')" class="px-6 py-3.5 bg-brandGreen-500 text-white font-bold rounded-lg hover:bg-brandGreen-600 transition shadow">
                         <i class="fa-solid fa-microphone mr-1.5"></i> 講演のご相談・ご依頼
                     </button>
-                    <button onclick="switchTab('contact')" class="px-6 py-3 bg-brandBlue-800 text-white font-bold rounded hover:bg-brandBlue-900 transition shadow">
+                    <button onclick="switchTab('contact')" class="px-6 py-3.5 bg-brandBlue-800 text-white font-bold rounded-lg hover:bg-brandBlue-900 transition shadow">
                         <i class="fa-solid fa-person-running mr-1.5"></i> 体力測定会の開催を相談
                     </button>
                 </div>
@@ -867,9 +876,7 @@
         </section>
 
 
-        <!-- ==============================================
-             6. EX-FITNESS (EX型体力測定会)
-             ============================================== -->
+        <!-- 6. EX-FITNESS -->
         <section id="tab-ex-fitness" class="tab-content hidden py-16 bg-slate-50 animate-fade-in">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <!-- タイトル -->
@@ -879,104 +886,104 @@
                         体力測定を、楽しい地域イベントへ
                     </h2>
                     <div class="h-1 w-16 bg-brandGreen-500 mx-auto mt-4 rounded"></div>
-                    <p class="text-slate-600 mt-4 text-sm max-w-2xl mx-auto leading-relaxed">
-                        「正しいから参加する」ではなく、「楽しそうだから参加してみる」。<br>
+                    <p class="text-slate-600 mt-4 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                        「正しいから参加する」のではなく、「楽しそうだから参加してみる」。<br>
                         その入口から、健康づくりや生涯運動を始めるきっかけをつくる、有川一の看板活動プロジェクトです。
                     </p>
                 </div>
 
                 <!-- EX＝Entertainment Transformationとは何か -->
-                <div class="bg-white p-8 rounded-2xl border border-slate-200 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                    <div class="md:col-span-8 space-y-4 text-sm">
-                        <span class="inline-flex items-center px-2.5 py-1 rounded bg-amber-50 text-brandOrange-600 font-bold text-xs">
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm">
+                    <div class="lg:col-span-8 space-y-4 text-sm sm:text-base">
+                        <span class="inline-flex items-center px-3 py-1 rounded bg-amber-50 text-brandOrange-600 font-bold text-xs">
                             EX = Entertainment Transformation
                         </span>
                         <h3 class="text-xl font-bold text-brandBlue-800">
                             「義務的検査」から「笑顔を伴う健康体験」への変容
                         </h3>
-                        <p class="text-slate-600 leading-relaxed">
+                        <p class="text-slate-600 leading-relaxed text-sm">
                             従来の行政による体力測定や健康診断は、参加者にとって「面倒そう」「自分の衰え（低い数値）を見るのが恐ろしい」といった、義務的な『検査』として敬遠されがちでした。
                         </p>
-                        <p class="text-slate-600 leading-relaxed">
-                            EX型体力測定会は、会場のレイアウト、ゲーム的なタイムアタック競技、明るい音楽、そして何より**元気いっぱいの大学生スタッフが全力で応援・伴走するスタイル**によって、会場全体を「楽しい健康アミューズメントパーク」に変容させます。
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            EX型体力測定会は、会場のレイアウト、ゲーム的なタイムアタック競技、明るい音楽、形成的なフィードバック、および<strong class="font-bold text-brandOrange-600">元気いっぱいの大学生スタッフが全力で応援・伴走するスタイル</strong>によって、会場全体を「楽しい健康アミューズメントパーク」に変容させます。
                         </p>
                     </div>
-                    <div class="md:col-span-4 bg-brandOrange-50 p-6 rounded-xl border border-brandOrange-100 text-center">
-                        <span class="text-brandOrange-500 text-6xl block mb-2"><i class="fa-solid fa-face-laugh-beam"></i></span>
-                        <p class="text-xs font-bold text-brandOrange-600">正しい知識を「楽しく」！</p>
+                    <div class="lg:col-span-4 bg-brandOrange-50 p-6 rounded-xl border border-brandOrange-100 text-center">
+                        <span class="text-brandOrange-500 text-6xl block mb-2"><i class="fa-solid fa-face-laugh-beam animate-pulse"></i></span>
+                        <p class="text-xs sm:text-sm font-bold text-brandOrange-600">正しい知識を「楽しく」！</p>
                     </div>
                 </div>
 
                 <!-- 測定種目とアプローチ -->
-                <div class="bg-white p-8 rounded-2xl border border-slate-200 text-sm space-y-6">
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 text-sm sm:text-base space-y-6 shadow-sm">
                     <h3 class="text-lg font-bold text-brandBlue-800">対応可能な代表的測定メニュー</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 hover:bg-slate-100 transition">
                             <span class="text-brandGreen-500 mt-0.5"><i class="fa-solid fa-hand-holding-hand"></i></span>
                             <div>
                                 <h4 class="font-bold text-slate-800">握力</h4>
                                 <p class="text-xs text-slate-500 mt-1">全身の筋力の総合バロメーター</p>
                             </div>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 hover:bg-slate-100 transition">
                             <span class="text-brandGreen-500 mt-0.5"><i class="fa-solid fa-arrows-left-right"></i></span>
                             <div>
                                 <h4 class="font-bold text-slate-800">長座体前屈</h4>
                                 <p class="text-xs text-slate-500 mt-1">日常生活の快適さを決める体の柔軟性</p>
                             </div>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 hover:bg-slate-100 transition">
                             <span class="text-brandGreen-500 mt-0.5"><i class="fa-solid fa-bolt"></i></span>
                             <div>
                                 <h4 class="font-bold text-slate-800">全身反応時間</h4>
                                 <p class="text-xs text-slate-500 mt-1">転倒予防にも極めて重要な「すばやさ」</p>
                             </div>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 hover:bg-slate-100 transition">
                             <span class="text-brandGreen-500 mt-0.5"><i class="fa-solid fa-stairs"></i></span>
                             <div>
                                 <h4 class="font-bold text-slate-800">10m障害物歩行 / 急歩</h4>
                                 <p class="text-xs text-slate-500 mt-1">歩く姿勢と敏捷性をチェック</p>
                             </div>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 hover:bg-slate-100 transition">
                             <span class="text-brandGreen-500 mt-0.5"><i class="fa-solid fa-heart-pulse"></i></span>
                             <div>
                                 <h4 class="font-bold text-slate-800">3分間・6分間歩行</h4>
                                 <p class="text-xs text-slate-500 mt-1">心肺機能や全身の持久力を楽しくチェック</p>
                             </div>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 hover:bg-slate-100 transition">
                             <span class="text-brandGreen-500 mt-0.5"><i class="fa-solid fa-file-invoice"></i></span>
                             <div>
-                                <h4 class="font-bold text-slate-800">体力年齢・結果票フィードバック</h4>
-                                <p class="text-xs text-slate-500 mt-1">その場で手書きのアドバイス・体力年齢を進呈</p>
+                                <h4 class="font-bold text-slate-800">体力年齢・結果票</h4>
+                                <p class="text-xs text-slate-500 mt-1">その場で結果票と体力年齢を進呈</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 代表的な導入現場のイメージ -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center text-sm">
-                    <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center text-sm">
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition">
                         <span class="text-brandBlue-800 text-2xl"><i class="fa-solid fa-house-medical"></i></span>
                         <h4 class="font-bold text-slate-800 mt-2">自治体イベント</h4>
-                        <p class="text-xs text-slate-500 mt-1">市民健康フェア、高齢者の運動サークルなど</p>
+                        <p class="text-xs text-slate-500 mt-1.5">市民健康フェア、高齢者の運動サークルなど</p>
                     </div>
-                    <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition">
                         <span class="text-brandBlue-800 text-2xl"><i class="fa-solid fa-dumbbell"></i></span>
-                        <h4 class="font-bold text-slate-800 mt-2">地域スポーツクラブ</h4>
-                        <p class="text-xs text-slate-500 mt-1">地域住民とクラブの交流健康測定フェスティバル</p>
+                        <h4 class="font-bold text-slate-800 mt-2">地域クラブ</h4>
+                        <p class="text-xs text-slate-500 mt-1.5">地域住民とクラブの交流健康測定フェスティバル</p>
                     </div>
-                    <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition">
                         <span class="text-brandBlue-800 text-2xl"><i class="fa-solid fa-building-user"></i></span>
                         <h4 class="font-bold text-slate-800 mt-2">企業・健康経営</h4>
-                        <p class="text-xs text-slate-500 mt-1">社内健康セミナーや、職場における疲労チェックイベント</p>
+                        <p class="text-xs text-slate-500 mt-1.5">社内健康セミナーや、職場における疲労チェックイベント</p>
                     </div>
-                    <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition">
                         <span class="text-brandBlue-800 text-2xl"><i class="fa-solid fa-school"></i></span>
-                        <h4 class="font-bold text-slate-800 mt-2">大学・オープンキャンパス</h4>
-                        <p class="text-xs text-slate-500 mt-1">オープンキャンパスの体験展示、学校行事、ゼミ活動</p>
+                        <h4 class="font-bold text-slate-800 mt-2">大学・OC体験</h4>
+                        <p class="text-xs text-slate-500 mt-1.5">オープンキャンパスの体験展示、学校行事、ゼミ活動</p>
                     </div>
                 </div>
 
@@ -986,10 +993,10 @@
                         EX型体力測定会キャラバンの活動記録、さらに詳しい測定ツール紹介は専用Webサイトにて公開されています。
                     </p>
                     <div class="flex flex-wrap justify-center gap-4">
-                        <a href="https://arikawa-webpage.jimdosite.com/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-brandOrange-500 text-white font-bold rounded hover:bg-brandOrange-600 transition shadow">
+                        <a href="https://ex-physical-test-caravan.jimdosite.com/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-brandOrange-500 text-white font-bold rounded-lg hover:bg-brandOrange-600 transition shadow">
                             <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> EX型体力測定会キャラバン 専用HPを見る
                         </a>
-                        <button onclick="switchTab('contact')" class="px-6 py-3 bg-white text-brandBlue-800 font-bold rounded hover:bg-slate-100 transition shadow">
+                        <button onclick="switchTab('contact')" class="px-6 py-3 bg-white text-brandBlue-800 font-bold rounded-lg hover:bg-slate-100 transition shadow">
                             開催プランについて相談する
                         </button>
                     </div>
@@ -998,9 +1005,7 @@
         </section>
 
 
-        <!-- ==============================================
-             7. STUDENTS (教育・学生プロジェクト)
-             ============================================== -->
+        <!-- 7. STUDENTS -->
         <section id="tab-students" class="tab-content hidden py-16 bg-white animate-fade-in">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <!-- タイトル -->
@@ -1013,17 +1018,17 @@
 
                 <!-- 導入文 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                    <div class="md:col-span-8 space-y-4 text-sm text-slate-600">
+                    <div class="md:col-span-8 space-y-4 text-sm sm:text-base text-slate-600">
                         <p class="leading-relaxed font-bold text-brandBlue-800">
                             大学の教室だけで学ぶスポーツ科学は、半分に過ぎません。残りの半分は、地域の現場に踏み出し、人々と対話することで初めて完成します。
                         </p>
-                        <p class="leading-relaxed">
+                        <p class="leading-relaxed text-sm">
                             中部学院大学スポーツ健康科学部における有川ゼミ、ならびに体力測定学生プロジェクトチームは、単に測定の「補助要員」として活動しているのではありません。
                             自分たちで健康イベントを企画・シミュレーションし、専門機材を安全に扱い、高齢者や子ども、働く人々に対して「相手が納得できる言葉」で身体の仕組みを解説する、主体的な学習者として参加しています。
                         </p>
                     </div>
                     <div class="md:col-span-4 bg-brandGreen-50 p-6 rounded-2xl border border-brandGreen-100 text-center">
-                        <span class="text-brandGreen-500 text-5xl block mb-2"><i class="fa-solid fa-user-graduate"></i></span>
+                        <span class="text-brandGreen-500 text-5xl block mb-2"><i class="fa-solid fa-user-graduate animate-pulse"></i></span>
                         <p class="text-xs font-bold text-brandGreen-600">学生による地域実践教育</p>
                     </div>
                 </div>
@@ -1031,8 +1036,8 @@
                 <!-- 教育の三方よしシナジー -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6">
                     <!-- 学生にとって -->
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3">
-                        <h3 class="font-bold text-brandBlue-800 flex items-center gap-2 text-sm sm:text-base">
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3 hover:shadow-md transition">
+                        <h3 class="font-bold text-brandBlue-800 flex items-center gap-2 text-base">
                             <i class="fa-solid fa-graduation-cap text-brandGreen-500"></i> 学生にとっての価値
                         </h3>
                         <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -1041,8 +1046,8 @@
                     </div>
 
                     <!-- 地域にとって -->
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3">
-                        <h3 class="font-bold text-brandBlue-800 flex items-center gap-2 text-sm sm:text-base">
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3 hover:shadow-md transition">
+                        <h3 class="font-bold text-brandBlue-800 flex items-center gap-2 text-base">
                             <i class="fa-solid fa-handshake-angle text-brandGreen-500"></i> 地域にとっての価値
                         </h3>
                         <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -1051,8 +1056,8 @@
                     </div>
 
                     <!-- 大学・研究にとって -->
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3">
-                        <h3 class="font-bold text-brandBlue-800 flex items-center gap-2 text-sm sm:text-base">
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3 hover:shadow-md transition">
+                        <h3 class="font-bold text-brandBlue-800 flex items-center gap-2 text-base">
                             <i class="fa-solid fa-university text-brandGreen-500"></i> 大学としての価値
                         </h3>
                         <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -1061,10 +1066,10 @@
                     </div>
                 </div>
 
-                <!-- プロジェクト風景の代わりとなるメッセージボード -->
+                <!-- メッセージボード -->
                 <div class="bg-brandBlue-50 p-8 rounded-2xl border border-brandBlue-100 text-center">
                     <p class="text-xs text-brandBlue-800 font-bold uppercase tracking-widest">Message from Project Lead</p>
-                    <p class="text-slate-700 text-sm mt-3 leading-relaxed max-w-3xl mx-auto italic">
+                    <p class="text-slate-700 text-sm sm:text-base mt-3 leading-relaxed max-w-3xl mx-auto italic">
                         「はじめは一般の高齢者の方に対してぎこちない喋り方だった学生が、測定会が進むにつれて驚くほど目つきが変わり、相手を励まし、結果を丁寧にアドバイスできるようになる。その飛躍的な成長を目撃することこそ、私自身の最大の教育の喜びです。」
                     </p>
                 </div>
@@ -1072,9 +1077,7 @@
         </section>
 
 
-        <!-- ==============================================
-             8. BLOG (コラム・発信)
-             ============================================== -->
+        <!-- 8. BLOG -->
         <section id="tab-blog" class="tab-content hidden py-16 bg-white animate-fade-in">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <!-- タイトル -->
@@ -1090,36 +1093,36 @@
 
                 <!-- ブログ分類マップ -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
-                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-center hover:bg-slate-100 transition duration-300">
                         <span class="text-brandBlue-800 text-xl"><i class="fa-solid fa-heart-pulse"></i></span>
                         <h4 class="font-bold text-slate-800 mt-2">運動と生涯健康</h4>
                         <p class="text-xs text-slate-500 mt-1">フレイル予防、歩行能力の向上など、中高年から始める健康づくりのコツ</p>
                     </div>
-                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-center hover:bg-slate-100 transition duration-300">
                         <span class="text-brandBlue-800 text-xl"><i class="fa-solid fa-lightbulb"></i></span>
                         <h4 class="font-bold text-slate-800 mt-2">からだの豆知識</h4>
                         <p class="text-xs text-slate-500 mt-1">運動生理学、呼吸、筋肉、疲労、適切な休息や睡眠など、実生活に役立つ知識</p>
                     </div>
-                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-center hover:bg-slate-100 transition duration-300">
                         <span class="text-brandBlue-800 text-xl"><i class="fa-solid fa-children"></i></span>
-                        <h4 class="font-bold text-slate-800 mt-2">ジュニアスポーツ指導</h4>
+                        <h4 class="font-bold text-slate-800 mt-2">ジュニア指導</h4>
                         <p class="text-xs text-slate-500 mt-1">ジュニア期の発達、根性論に頼らない声かけ指導法、指導者の教育的責任</p>
                     </div>
-                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-center hover:bg-slate-100 transition duration-300">
                         <span class="text-brandBlue-800 text-xl"><i class="fa-solid fa-paperclip"></i></span>
                         <h4 class="font-bold text-slate-800 mt-2">論文紹介・メモ</h4>
                         <p class="text-xs text-slate-500 mt-1">国内外の運動健康論文、呼吸、熱中症対策、その他身体反応の科学要約</p>
                     </div>
                 </div>
 
-                <!-- 模擬新着記事コラム（信頼性と実名軸に絞る） -->
+                <!-- 模擬新着記事コラム -->
                 <div class="space-y-6">
                     <h3 class="text-lg font-bold text-brandBlue-800 flex items-center gap-2">
                         <i class="fa-solid fa-book-open text-brandGreen-500"></i> 代表的な発信コラム・記事例
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                        <div class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:shadow transition">
+                        <div class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:shadow-lg transition">
                             <div class="space-y-2">
                                 <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold">運動と脳科学</span>
                                 <h4 class="font-bold text-slate-900">運動×100マス計算！身体と脳を同時に活性化する仕掛けとは</h4>
@@ -1130,7 +1133,7 @@
                             <span class="text-xs text-brandBlue-800 mt-4 block font-bold cursor-pointer hover:underline">続きを読む →</span>
                         </div>
 
-                        <div class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:shadow transition">
+                        <div class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:shadow-lg transition">
                             <div class="space-y-2">
                                 <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold">健康継続</span>
                                 <h4 class="font-bold text-slate-900">「正しい」だけでは続かない！高齢者運動サークルが活性化するコツ</h4>
@@ -1141,7 +1144,7 @@
                             <span class="text-xs text-brandBlue-800 mt-4 block font-bold cursor-pointer hover:underline">続きを読む →</span>
                         </div>
 
-                        <div class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:shadow transition">
+                        <div class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:shadow-lg transition">
                             <div class="space-y-2">
                                 <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold">呼吸生理学</span>
                                 <h4 class="font-bold text-slate-900">剣道の発声と身体負荷の相関。なぜ声を張ると身体反応が変わるか</h4>
@@ -1154,12 +1157,14 @@
                     </div>
                 </div>
 
+
                 <!-- 外部ブログへの接続 -->
                 <div class="bg-brandBlue-50 p-8 rounded-2xl border border-brandBlue-100 text-center space-y-4">
                     <p class="text-sm text-slate-700">
                         より詳細なブログ記事、有川一のコラム発信のアーカイブは外部Webサイトで公開されています。
                     </p>
-                    <a href="https://arikawa-webpage.jimdosite.com/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-brandBlue-800 text-white font-bold rounded hover:bg-brandBlue-900 transition shadow inline-flex items-center gap-2">
+                    <!-- ご指定のURL (https://arikawa-weblog.jimdofree.com/) に変更 -->
+                    <a href="https://arikawa-weblog.jimdofree.com/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-brandBlue-800 text-white font-bold rounded-lg hover:bg-brandBlue-900 transition shadow inline-flex items-center gap-2">
                         <i class="fa-solid fa-square-rss"></i> スポーツ科学系ブログ（外部）を読む
                     </a>
                 </div>
@@ -1167,9 +1172,7 @@
         </section>
 
 
-        <!-- ==============================================
-             9. CONTACT (お問い合わせ)
-             ============================================== -->
+        <!-- 9. CONTACT -->
         <section id="tab-contact" class="tab-content hidden py-16 bg-slate-50 animate-fade-in">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <!-- タイトル -->
@@ -1180,22 +1183,22 @@
                     </h2>
                     <p class="text-slate-500 mt-3 text-sm max-w-2xl mx-auto leading-relaxed">
                         講演、研修、体力測定会、健康づくり事業、スポーツ科学に関する情報提供などのご相談を受け付けています。<br>
-                        対象者、目的、実施時期、会場、予算などが未定の段階でもお気軽にご相談ください。
+                        対象者、目的、実施時期、会場、予算などが未定 of 段階でもお気軽にご相談ください。
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <!-- 左：案内・窓口 -->
                     <div class="lg:col-span-5 space-y-6 text-sm text-slate-600">
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4 shadow-sm">
                             <h3 class="font-bold text-brandBlue-800 flex items-center gap-2">
                                 <i class="fa-solid fa-university text-brandGreen-500"></i> お問合せ・連携窓口
                             </h3>
-                            <p class="text-xs leading-relaxed">
+                            <p class="text-xs sm:text-sm leading-relaxed">
                                 <strong>中部学院大学 スポーツ健康科学部</strong><br>
-                                有川 一 研究室（有川 カレッジ）
+                                有川 一 研究室
                             </p>
-                            <p class="text-xs text-slate-500">
+                            <p class="text-xs text-slate-500 leading-relaxed">
                                 自治体の健康フェア、地域総合型スポーツクラブ、小中高校、スポーツ少年団研修、企業の健康経営イベントなどに関するご相談を幅広く受け付けております。
                             </p>
                         </div>
@@ -1208,67 +1211,76 @@
                         </div>
                     </div>
 
-                    <!-- 右：問い合わせフォーム (Googleフォームでの実装を意識したUI設計) -->
+                    <!-- 右：問い合わせフォーム -->
                     <div class="lg:col-span-7 bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-sm">
                         <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
                             <div>
                                 <label class="block text-slate-700 font-bold mb-1">お名前・代表者氏名 <span class="text-red-500">*</span></label>
-                                <input type="text" required class="w-full border border-slate-300 rounded px-3 py-2 focus:ring-1 focus:ring-brandGreen-500 outline-none">
+                                <input type="text" id="form-name" required class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
                             </div>
 
                             <div>
                                 <label class="block text-slate-700 font-bold mb-1">所属・団体名 / 自治体名</label>
-                                <input type="text" class="w-full border border-slate-300 rounded px-3 py-2 focus:ring-1 focus:ring-brandGreen-500 outline-none">
+                                <input type="text" id="form-org" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
                             </div>
 
                             <div>
                                 <label class="block text-slate-700 font-bold mb-1">メールアドレス <span class="text-red-500">*</span></label>
-                                <input type="email" required class="w-full border border-slate-300 rounded px-3 py-2 focus:ring-1 focus:ring-brandGreen-500 outline-none">
+                                <input type="email" id="form-email" required class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
                             </div>
 
                             <div>
                                 <label class="block text-slate-700 font-bold mb-1">お電話番号</label>
-                                <input type="tel" class="w-full border border-slate-300 rounded px-3 py-2 focus:ring-1 focus:ring-brandGreen-500 outline-none">
+                                <input type="tel" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
                             </div>
 
                             <div>
                                 <label class="block text-slate-700 font-bold mb-1">ご相談内容 <span class="text-red-500">*</span></label>
-                                <select required class="w-full border border-slate-300 rounded px-3 py-2 focus:ring-1 focus:ring-brandGreen-500 outline-none bg-white">
+                                <select required id="form-type" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none bg-white">
                                     <option value="">-- 選択してください --</option>
-                                    <option value="lecture_general">一般向け・高齢者向け健康講演</option>
-                                    <option value="lecture_leader">スポーツ指導者研修講演</option>
-                                    <option value="lecture_school">学校・PTA向け講演</option>
-                                    <option value="fitness_ex">EX型体力測定会の開催</option>
-                                    <option value="student_project">学生プロジェクトとの連携</option>
-                                    <option value="research_collaboration">共同研究・地域健康事業の相談</option>
-                                    <option value="media">取材・原稿執筆依頼</option>
-                                    <option value="other">その他のお問い合わせ</option>
+                                    <option value="健康講演">一般向け・高齢者向け健康講演</option>
+                                    <option value="スポーツ指導者研修">スポーツ指導者研修講演</option>
+                                    <option value="学校・PTA向け講演">学校・PTA向け講演</option>
+                                    <option value="EX型体力測定会開催">EX型体力測定会の開催</option>
+                                    <option value="学生プロジェクト連携">学生プロジェクトとの連携</option>
+                                    <option value="共同研究ご相談">共同研究・地域健康事業 of 相談</option>
+                                    <option value="メディア・執筆依頼">取材・原稿執筆依頼</option>
+                                    <option value="その他お問い合わせ">その他のお問い合わせ</option>
                                 </select>
                             </div>
 
                             <div>
                                 <label class="block text-slate-700 font-bold mb-1">想定する対象者イメージ・参加人数</label>
-                                <input type="text" placeholder="例：高齢者30名、小中学生の保護者50名、等" class="w-full border border-slate-300 rounded px-3 py-2 focus:ring-1 focus:ring-brandGreen-500 outline-none">
+                                <input type="text" placeholder="例：高齢者30名、小中学生の保護者50名、等" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none">
                             </div>
 
                             <div>
                                 <label class="block text-slate-700 font-bold mb-1">相談の詳細、希望時期、ご予算等</label>
-                                <textarea rows="4" placeholder="大体の時期や希望、予算感などがございましたらご自由にお書きください。" class="w-full border border-slate-300 rounded px-3 py-2 focus:ring-1 focus:ring-brandGreen-500 outline-none"></textarea>
+                                <textarea id="form-detail" rows="4" placeholder="大体の時期や希望、予算感などがございましたらご自由にお書きください。" class="w-full border border-slate-300 rounded px-3 py-2.5 focus:ring-1 focus:ring-brandGreen-500 outline-none"></textarea>
                             </div>
 
-                            <button type="submit" class="w-full py-3 bg-brandGreen-500 text-white font-bold rounded shadow hover:bg-brandGreen-600 transition">
+                            <button type="submit" class="w-full py-3 bg-brandGreen-500 text-white font-bold rounded shadow hover:bg-brandGreen-600 transition duration-200">
                                 <i class="fa-solid fa-paper-plane mr-2"></i>送信内容を確認して送信する
                             </button>
                         </form>
                         
                         <!-- 送信完了表示 -->
                         <div id="form-success-msg" class="hidden text-center py-6 space-y-4">
-                            <span class="text-brandGreen-500 text-5xl animate-bounce"><i class="fa-solid fa-circle-check"></i></span>
+                            <span class="text-brandGreen-500 text-5xl animate-bounce inline-block"><i class="fa-solid fa-circle-check"></i></span>
                             <h4 class="font-bold text-slate-900 text-lg">お問い合わせ内容を送信しました</h4>
+                            
+                            <!-- 簡易確認プレビュー -->
+                            <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-left text-xs text-slate-600 space-y-2 max-w-md mx-auto shadow-inner">
+                                <p><strong>送信内容の控え：</strong></p>
+                                <p>■ お名前: <span id="summary-name" class="font-medium text-slate-800"></span></p>
+                                <p>■ 所属: <span id="summary-org" class="font-medium text-slate-800"></span></p>
+                                <p>■ 種別: <span id="summary-type" class="font-medium text-slate-800"></span></p>
+                            </div>
+
                             <p class="text-xs text-slate-500 leading-relaxed">
-                                お送りいただいた内容を確認のうえ、担当事務局および研究室よりお返事を差し上げます。<br>今しばらくお待ちください。
+                                お送りいただいた内容を確認のうえ、研究室よりお返事を差し上げます。<br>今しばらくお待ちください。
                             </p>
-                            <button onclick="resetContactForm()" class="px-4 py-2 bg-slate-100 text-slate-600 rounded text-xs hover:bg-slate-200">別のお問い合わせを送る</button>
+                            <button onclick="resetContactForm()" class="px-4 py-2 bg-slate-100 text-slate-600 rounded text-xs hover:bg-slate-200 transition">別のお問い合わせを送る</button>
                         </div>
                     </div>
                 </div>
@@ -1276,9 +1288,7 @@
         </section>
 
 
-        <!-- ==============================================
-             10. ENGLISH PROFILE
-             ============================================== -->
+        <!-- 10. ENGLISH PROFILE -->
         <section id="tab-english" class="tab-content hidden py-16 bg-white font-sans text-slate-700 animate-fade-in">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <!-- Academic Introduction -->
@@ -1336,7 +1346,7 @@
                 <div class="pt-6 border-t border-slate-200">
                     <h3 class="font-bold text-slate-800 text-sm mb-4">Official Portals</h3>
                     <div class="flex flex-wrap gap-4 text-xs">
-                        <a href="https://researchmap.jp/arikawahajime?lang=en" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 bg-brandBlue-800 text-white rounded hover:bg-brandBlue-900 transition font-semibold inline-flex items-center gap-1.5">
+                        <a href="https://researchmap.jp/arikawahajime?lang=en" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 bg-brandBlue-800 text-white rounded hover:bg-brandBlue-900 transition font-semibold inline-flex items-center gap-1.5 shadow-sm">
                             <i class="fa-solid fa-up-right-from-square"></i> researchmap Profile (English)
                         </a>
                         <a href="https://www.chubu-gu.ac.jp/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 border border-slate-300 rounded hover:bg-slate-50 transition text-slate-600 font-semibold inline-flex items-center gap-1.5">
@@ -1357,7 +1367,7 @@
                 <span class="text-brandGreen-500 font-serif font-bold text-lg">有川 一 <span class="text-xs font-sans font-light text-slate-300">公式ホームページ</span></span>
                 <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
                     「からだを知る楽しさを、地域・教育・健康づくりの現場へ。」<br>
-                    生理学、運動生理学を地域の健康・教育、あらゆる社会の実践現場へ。
+                    生理学、スポーツ科学を地域の健康・教育、あらゆる社会の実践現場へ。
                 </p>
             </div>
             <!-- 中：メニュー -->
@@ -1382,7 +1392,7 @@
                     <a href="https://researchmap.jp/arikawahajime" target="_blank" rel="noopener noreferrer" class="hover:text-white flex items-center gap-1.5 transition">
                         <i class="fa-solid fa-up-right-from-square"></i> researchmap (有川 一)
                     </a>
-                    <a href="https://arikawa-webpage.jimdosite.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white flex items-center gap-1.5 transition">
+                    <a href="https://ex-physical-test-caravan.jimdosite.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white flex items-center gap-1.5 transition">
                         <i class="fa-solid fa-up-right-from-square"></i> 旧ホームページ（Jimdo版）
                     </a>
                 </div>
@@ -1425,14 +1435,36 @@
                 activeNav.classList.remove('text-slate-300');
             }
 
-            // 4. スマホ用メニューを閉じてアイコンを初期化
-            document.getElementById('mobile-menu').classList.add('hidden');
-            document.getElementById('menu-icon').className = 'fa-solid fa-bars text-2xl';
+            // 4. スマホ用メニュー内のアクティブボタンを変更
+            const mobileNavButtons = document.querySelectorAll('.mobile-nav-btn');
+            mobileNavButtons.forEach(btn => {
+                btn.classList.remove('bg-brandBlue-800', 'text-white');
+                btn.classList.add('text-slate-300');
+            });
+            const activeMobileNav = document.getElementById('mobile-nav-' + tabId);
+            if (activeMobileNav) {
+                activeMobileNav.classList.add('bg-brandBlue-800', 'text-white');
+                activeMobileNav.classList.remove('text-slate-300');
+            }
 
-            // 5. ページトップへ強制スクロール
+            // 5. スマホ用メニューを閉じてアイコンを初期化
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            const button = document.getElementById('mobile-menu-button');
+            if (menu) {
+                menu.classList.add('hidden');
+            }
+            if (icon) {
+                icon.className = 'fa-solid fa-bars text-2xl';
+            }
+            if (button) {
+                button.setAttribute('aria-expanded', 'false');
+            }
+
+            // 6. ページトップへ瞬間移動
             window.scrollTo({ top: 0, behavior: 'instant' });
 
-            // 6. MathJaxの再ロード（タブ切り替え時に数式表示を補正）
+            // 7. MathJaxの再ロード
             if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
                 window.MathJax.typesetPromise();
             }
@@ -1442,18 +1474,34 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
+            const button = document.getElementById('mobile-menu-button');
+            
             if (menu.classList.contains('hidden')) {
                 menu.classList.remove('hidden');
                 icon.className = 'fa-solid fa-xmark text-2xl';
+                button.setAttribute('aria-expanded', 'true');
             } else {
                 menu.classList.add('hidden');
                 icon.className = 'fa-solid fa-bars text-2xl';
+                button.setAttribute('aria-expanded', 'false');
             }
         }
 
         // お問い合わせフォームダミー送信
         function handleFormSubmit(event) {
             event.preventDefault();
+            
+            // 入力データの取得
+            const name = document.getElementById('form-name').value;
+            const org = document.getElementById('form-org').value || '個人 / なし';
+            const email = document.getElementById('form-email').value;
+            const type = document.getElementById('form-type').value;
+
+            // プレビューの反映
+            document.getElementById('summary-name').innerText = name;
+            document.getElementById('summary-org').innerText = org;
+            document.getElementById('summary-type').innerText = type;
+
             const form = document.getElementById('contact-form');
             const successMsg = document.getElementById('form-success-msg');
             
@@ -1470,6 +1518,7 @@
             form.classList.remove('hidden');
             successMsg.classList.add('hidden');
         }
+
     </script>
 </body>
 </html>
