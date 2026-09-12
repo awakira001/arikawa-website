@@ -4,6 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>有川 一 公式ホームページ | 中部学院大学スポーツ健康科学部 教授</title>
+    <meta name="description" content="中部学院大学スポーツ健康科学部教授・有川一の公式ホームページ。スポーツ生理学、呼吸・発声研究、EX型体力測定会、地域健康づくり、学生教育の活動を紹介します。">
+    <meta name="author" content="有川 一">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://awakira001.github.io/arikawa-website/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="有川 一 公式ホームページ">
+    <meta property="og:title" content="有川 一 公式ホームページ">
+    <meta property="og:description" content="スポーツ科学を、地域・教育・健康づくりの現場へ。研究、地域貢献、EX型体力測定会、学生教育の活動を紹介します。">
+    <meta property="og:url" content="https://awakira001.github.io/arikawa-website/">
+    <meta property="og:image" content="https://awakira001.github.io/arikawa-website/arikawa_photo_01.jpg">
+    <meta property="og:image:alt" content="中部学院大学スポーツ健康科学部教授 有川一">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="有川 一 公式ホームページ">
+    <meta name="twitter:description" content="スポーツ科学を、地域・教育・健康づくりの現場へ。">
+    <meta name="twitter:image" content="https://awakira001.github.io/arikawa-website/arikawa_photo_01.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "有川 一",
+      "alternateName": "Hajime Arikawa",
+      "honorificSuffix": "Ph.D.",
+      "jobTitle": "教授",
+      "affiliation": {
+        "@type": "CollegeOrUniversity",
+        "name": "中部学院大学",
+        "url": "https://www.chubu-gu.ac.jp/"
+      },
+      "url": "https://awakira001.github.io/arikawa-website/",
+      "sameAs": [
+        "https://researchmap.jp/arikawahajime"
+      ],
+      "knowsAbout": [
+        "スポーツ生理学",
+        "運動生理学",
+        "呼吸生理学",
+        "健康増進",
+        "体力測定"
+      ]
+    }
+    </script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -93,30 +135,11 @@
     <script>
         // 画像読み込みエラー時の段階的マッピング
         function handleImageError(img) {
-            if (!img.dataset.attempt) {
-                img.dataset.attempt = "0";
-            }
-            const attempts = [
-                "arikawa_photo_01.jpg",
-                "arikawa%20photo%2001.jpg",
-                "arikawa photo 01.jpg",
-                "/arikawa_photo_01.jpg",
-                "./arikawa_photo_01.jpg",
-                "../arikawa_photo_01.jpg"
-            ];
-            const currentAttempt = parseInt(img.dataset.attempt);
-            if (currentAttempt < attempts.length) {
-                const nextSrc = attempts[currentAttempt];
-                img.dataset.attempt = (currentAttempt + 1).toString();
-                img.src = nextSrc;
-            } else {
-                // すべて読み込めない場合は、イラストレーターライクなインラインSVGフォールバックを表示
-                img.style.display = 'none';
-                const loader = document.getElementById('image-loader');
-                const fallback = document.getElementById('image-fallback');
-                if (loader) loader.classList.add('hidden');
-                if (fallback) fallback.classList.remove('hidden');
-            }
+            img.style.display = 'none';
+            const loader = document.getElementById('image-loader');
+            const fallback = document.getElementById('image-fallback');
+            if (loader) loader.classList.add('hidden');
+            if (fallback) fallback.classList.remove('hidden');
         }
 
         // 写真が完全にロードされた場合の優雅なフェードイン処理
@@ -460,7 +483,7 @@
                                 </div>
                                 
                                 <!-- 3. 前景お写真：ご提供の arikawa_photo_01.jpg。高画質にフィットさせ、ホバー時に微細にズームするエフェクト -->
-                                <img src="arikawa_photo_01.jpg" id="arikawa-portrait" alt="有川 一 教授" onload="handleImageLoad(this)" onerror="handleImageError(this)" class="absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-700 ease-out opacity-0 group-hover:scale-105 high-quality-img">
+                                <img src="arikawa_photo_01.jpg" id="arikawa-portrait" alt="有川 一 教授" onload="handleImageLoad(this)" onerror="handleImageError(this)" class="absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-700 ease-out opacity-0 group-hover:scale-105 high-quality-img" loading="lazy" decoding="async">
                             </div>
                             <div class="text-center mt-3">
                                 <p class="font-serif font-bold text-slate-800 text-lg">有川 一</p>
@@ -1460,12 +1483,27 @@
     <!-- INTERACTIVE SCRIPTS -->
     <script>
         // タブ切り替え制御（SPA型システム）
-        function switchTab(tabId) {
+        const pageTitles = {
+            home: '有川 一 公式ホームページ | 中部学院大学スポーツ健康科学部 教授',
+            about: '有川 一について | 有川 一 公式ホームページ',
+            pillars: '活動の7本柱 | 有川 一 公式ホームページ',
+            research: '研究 | 有川 一 公式ホームページ',
+            community: '地域貢献・講演 | 有川 一 公式ホームページ',
+            'ex-fitness': 'EX型体力測定会 | 有川 一 公式ホームページ',
+            students: '学生プロジェクト | 有川 一 公式ホームページ',
+            blog: 'ブログ・発信 | 有川 一 公式ホームページ',
+            contact: 'お問い合わせ | 有川 一 公式ホームページ',
+            english: 'English Profile | Hajime Arikawa'
+        };
+
+        function switchTab(tabId, options = {}) {
+            const { updateHistory = true } = options;
             // 1. 全コンテンツを非表示にする
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => {
                 content.classList.add('hidden');
                 content.classList.remove('block');
+                content.setAttribute('aria-hidden', 'true');
             });
 
             // 2. 対象コンテンツのみ表示する
@@ -1473,6 +1511,7 @@
             if (targetContent) {
                 targetContent.classList.remove('hidden');
                 targetContent.classList.add('block');
+                targetContent.setAttribute('aria-hidden', 'false');
             }
 
             // 3. PCナビボタンのアクティブ状態を変更
@@ -1480,11 +1519,13 @@
             navButtons.forEach(btn => {
                 btn.classList.remove('nav-link-active');
                 btn.classList.add('text-slate-300');
+                btn.removeAttribute('aria-current');
             });
             const activeNav = document.getElementById('nav-' + tabId);
             if (activeNav) {
                 activeNav.classList.add('nav-link-active');
                 activeNav.classList.remove('text-slate-300');
+                activeNav.setAttribute('aria-current', 'page');
             }
 
             // 4. スマホ用メニュー内のアクティブボタンを変更
@@ -1514,13 +1555,31 @@
             }
 
             // 6. ページトップへ瞬間移動
-            window.scrollTo({ top: 0, behavior: 'instant' });
+            window.scrollTo({ top: 0, behavior: 'auto' });
 
-            // 7. MathJaxの再ロード
+            // 7. URLとページタイトルを現在のタブに合わせる
+            document.title = pageTitles[tabId] || pageTitles.home;
+            if (updateHistory) {
+                const nextHash = '#' + tabId;
+                if (window.location.hash !== nextHash) {
+                    window.history.pushState({ tabId }, '', nextHash);
+                }
+            }
+
+            // 8. MathJaxの再ロード
             if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
                 window.MathJax.typesetPromise();
             }
         }
+
+        function openTabFromLocation() {
+            const requestedTab = window.location.hash.replace('#', '');
+            const tabId = document.getElementById('tab-' + requestedTab) ? requestedTab : 'home';
+            switchTab(tabId, { updateHistory: false });
+        }
+
+        window.addEventListener('DOMContentLoaded', openTabFromLocation);
+        window.addEventListener('popstate', openTabFromLocation);
 
         // スマホ用ハンバーガーメニュー開閉
         function toggleMobileMenu() {

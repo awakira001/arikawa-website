@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://awakira001.github.io/arikawa-website/sitemap.xml
