@@ -135,30 +135,11 @@
     <script>
         // 画像読み込みエラー時の段階的マッピング
         function handleImageError(img) {
-            if (!img.dataset.attempt) {
-                img.dataset.attempt = "0";
-            }
-            const attempts = [
-                "arikawa_photo_01.jpg",
-                "arikawa%20photo%2001.jpg",
-                "arikawa photo 01.jpg",
-                "/arikawa_photo_01.jpg",
-                "./arikawa_photo_01.jpg",
-                "../arikawa_photo_01.jpg"
-            ];
-            const currentAttempt = parseInt(img.dataset.attempt);
-            if (currentAttempt < attempts.length) {
-                const nextSrc = attempts[currentAttempt];
-                img.dataset.attempt = (currentAttempt + 1).toString();
-                img.src = nextSrc;
-            } else {
-                // すべて読み込めない場合は、イラストレーターライクなインラインSVGフォールバックを表示
-                img.style.display = 'none';
-                const loader = document.getElementById('image-loader');
-                const fallback = document.getElementById('image-fallback');
-                if (loader) loader.classList.add('hidden');
-                if (fallback) fallback.classList.remove('hidden');
-            }
+            img.style.display = 'none';
+            const loader = document.getElementById('image-loader');
+            const fallback = document.getElementById('image-fallback');
+            if (loader) loader.classList.add('hidden');
+            if (fallback) fallback.classList.remove('hidden');
         }
 
         // 写真が完全にロードされた場合の優雅なフェードイン処理
